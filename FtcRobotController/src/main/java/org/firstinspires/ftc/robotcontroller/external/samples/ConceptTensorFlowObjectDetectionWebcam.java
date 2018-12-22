@@ -113,7 +113,7 @@ public class ConceptTensorFlowObjectDetectionWebcam extends LinearOpMode {
                     if (updatedRecognitions != null) {
                       telemetry.addData("# Object Detected", updatedRecognitions.size());
                       if (updatedRecognitions.size() == 3) {
-                        int goldMineralX = -1;
+                        int goldMineralX = -1; //angle
                         int silverMineral1X = -1;
                         int silverMineral2X = -1;
                         for (Recognition recognition : updatedRecognitions) {

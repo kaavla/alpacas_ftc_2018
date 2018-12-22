@@ -13,6 +13,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+
 
 @TeleOp(name="M_A_Gamepad Linear OpMode", group="Linear Opmode")
 //@Disabled
@@ -34,6 +37,7 @@ public class AlphaGamepad extends LinearOpMode {
     private CRServo spinnerServo = null;
     private Servo trayServo = null;
     private Servo markerServo = null;
+
 
 
 
