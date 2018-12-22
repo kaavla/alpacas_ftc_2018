@@ -19,17 +19,18 @@ public class Mihika_AutonomousMode extends LinearOpMode {
 
         /* Declare OpMode members. */
         HardwareAutonomous         robot   = new HardwareAutonomous();   // Use a Pushbot's hardware
-        private ElapsedTime runtime = new ElapsedTime();
+        /***private ElapsedTime runtime = new ElapsedTime();
 
         static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
         static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // This is < 1.0 if geared UP
         static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
         static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
                 (WHEEL_DIAMETER_INCHES * 3.1415);
-        static final double     DRIVE_SPEED             = 0.5;
-        static final double     TURN_SPEED              = 1;
+        static final double     DRIVE_SPEED             = 0.7;
+        static final double     TURN_SPEED              = 0.8;
         private Servo markerServo = null;
         private CRServo spinnerServo = null;
+         ***/
 
         //number of encoder ticks for going up and down.
         // 1.75 inch requires 20 rotations.
@@ -56,7 +57,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
             telemetry.addData("Status", "Resetting Encoders");    //
             telemetry.update();
 
-            markerServo = hardwareMap.servo.get("markerServo");
+            robot.markerServo = hardwareMap.servo.get("markerServo");
 
             robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -88,20 +89,20 @@ public class Mihika_AutonomousMode extends LinearOpMode {
             //may need to change time to 6.5
             //may need to change inches/distance once ticks per inch is changed
             myEncoderDrive(3, 0.3, 5, 5.0);
-            myEncoderDrive(0, DRIVE_SPEED, 63, 5.0);
+            myEncoderDrive(0, robot.DRIVE_SPEED, 63, 5.0);
             //markerServo.setPosition(0.9);
             //myLanderLift(2, 0.6, 5, 0.5);
             //spinnerServo.setPower(0.79);
-            rotate(20, TURN_SPEED);
-            markerServo.setPosition(-0.9);
-            rotate(10, TURN_SPEED);
+            rotate(20, robot.TURN_SPEED);
+            robot.markerServo.setPosition(-0.9);
+            rotate(10, robot.TURN_SPEED);
             myEncoderDrive(3, 0.3, 5, 5.0);
             myLanderLift(1, 1, 1, 1);
             //40
-            myEncoderDrive(1, DRIVE_SPEED, 83, 5.0);
+            myEncoderDrive(1, robot.DRIVE_SPEED, 83, 5.0);
             //might need to change length moving above
-            rotate(10, TURN_SPEED);
-            myEncoderDrive(1, DRIVE_SPEED, 13,7.0);
+            rotate(10, robot.TURN_SPEED);
+            myEncoderDrive(1, robot.DRIVE_SPEED, 13,7.0);
             //park in crater
             myLanderLift(1, 1, 6, 7.0);
 
@@ -157,7 +158,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
                 robot.landerLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                 // reset the timeout time and start motion.
-                runtime.reset();
+                robot.runtime.reset();
                 robot.landerLift.setPower(Math.abs(speed));
 
                 // keep looping while we are still active, and there is time left, and both motors are running.
@@ -170,10 +171,10 @@ public class Mihika_AutonomousMode extends LinearOpMode {
                 //        (runtime.seconds() < timeoutS) &&
                  //       (robot.landerLift.isBusy() )) {
                     while (opModeIsActive() &&
-                            (runtime.seconds() < timeoutS)) {
+                            (robot.runtime.seconds() < timeoutS)) {
 
                     // Display it for the driver.
-                    telemetry.addData("Path1",  "Run time to %7f", runtime.seconds());
+                    telemetry.addData("Path1",  "Run time to %7f", robot.runtime.seconds());
                     //telemetry.addData("Path2",  "Running at %7d :%7d",
                     //        robot.landerLift.getCurrentPosition());
                     telemetry.update();
@@ -212,43 +213,43 @@ public class Mihika_AutonomousMode extends LinearOpMode {
                 if (direction == 0)
                 {
                     //Go forward
-                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
+                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
                 } else if (direction == 1)
                 {
                     //Go backward
-                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
-                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
-                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
-                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
+                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
+                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
+                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
+                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
                 }
                 else if (direction == 2)
                 {
                     //Strafe Right
-                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
-                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
-                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
+                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
+                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
+                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
 
                 }
                 else if (direction == 3)
                 {
                     //Strafe Left
-                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
-                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(-1*Inches * COUNTS_PER_INCH);
+                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
+                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(-1*Inches * robot.COUNTS_PER_INCH);
 
                 }
                 else
                 {
                     Inches = 0;
-                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
-                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(Inches * COUNTS_PER_INCH);
+                    newLeftTarget = robot.rightMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newRightTarget = robot.leftMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
+                    newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int)(Inches * robot.COUNTS_PER_INCH);
 
                 }
 
@@ -264,7 +265,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
                 robot.backrightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
                 // reset the timeout time and start motion.
-                runtime.reset();
+                robot.runtime.reset();
                 robot.leftMotor.setPower(Math.abs(speed));
                 robot.rightMotor.setPower(Math.abs(speed));
                 robot.backleftMotor.setPower(Math.abs(speed));
@@ -277,7 +278,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
                 // However, if you require that BOTH motors have finished their moves before the robot continues
                 // onto the next step, use (isBusy() || isBusy()) in the loop test.
                 while (opModeIsActive() &&
-                        (runtime.seconds() < timeoutS) &&
+                        (robot.runtime.seconds() < timeoutS) &&
                         (robot.leftMotor.isBusy() )) {
 
                     // Display it for the driver.
@@ -303,17 +304,19 @@ public class Mihika_AutonomousMode extends LinearOpMode {
                 sleep(200);   // optional pause after each move
             }
         }
+        /**
         private void resetAngle()
         {
             lastAngles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
             globalAngle = 0;
-        }
+        }*/
 
         /*
          * Get current cumulative angle rotation from last reset.
          * @return Angle in degrees. + = left, - = right.
          */
+        /*
         private double getAngle()
         {
             // We experimentally determined the Z axis is the axis we want to use for heading angle.
@@ -336,6 +339,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
 
             return globalAngle;
         }
+        */
         /**
          * Rotate left or right the number of degrees. Does not support turning more than 180 degrees.
          * @param degrees Degrees to turn, + is left - is right
@@ -344,7 +348,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
         {
 
             // restart imu movement tracking.
-            resetAngle();
+            robot.resetAngle();
 
 
             if (degrees < 0)
@@ -372,12 +376,12 @@ public class Mihika_AutonomousMode extends LinearOpMode {
             if (degrees < 0)
             {
                 // On right turn we have to get off zero first.
-                while (opModeIsActive() && getAngle() == 0) {}
+                while (opModeIsActive() && robot.getAngle() == 0) {}
 
-                while (opModeIsActive() && getAngle() > degrees) {}
+                while (opModeIsActive() && robot.getAngle() > degrees) {}
             }
             else    // left turn.
-                while (opModeIsActive() && getAngle() < degrees) {}
+                while (opModeIsActive() && robot.getAngle() < degrees) {}
 
             // turn the motors off.
             power=0;
@@ -390,9 +394,9 @@ public class Mihika_AutonomousMode extends LinearOpMode {
             sleep(1000);
 
             // reset angle tracking on new heading.
-            resetAngle();
+            robot.resetAngle();
         }
-        }
+}
 
 
 
