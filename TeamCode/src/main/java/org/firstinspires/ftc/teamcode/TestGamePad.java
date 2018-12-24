@@ -25,6 +25,7 @@ public class TestGamePad extends LinearOpMode {
 
     private DcMotor temp1 = null;
     private DcMotor temp2 = null;
+    private CRServo TempS1 = null;
 
 
 
@@ -43,6 +44,10 @@ public class TestGamePad extends LinearOpMode {
         //Initialize motor variables
         temp1 = hardwareMap.get(DcMotor.class, "Temp1");
         temp2 = hardwareMap.get(DcMotor.class, "Temp2");
+        TempS1 = hardwareMap.crservo.get("TempS1");
+
+        temp2.setDirection(DcMotorSimple.Direction.REVERSE);
+
 
         waitForStart();
         runtime.reset();
@@ -53,19 +58,38 @@ public class TestGamePad extends LinearOpMode {
             telemetry.addData("Motors", "FL(%.1f),FR(%.1f),BL(%.1f),BR(%.1f), count(%d)", motor_power, motor_power, motor_power, motor_power, count);
             telemetry.update();
 
-            if (gamepad1.dpad_up) {
+            if (gamepad1.dpad_up)
+            {
                 //Go Forward
-                temp1.setPower(0.3);
-            } else if (gamepad1.dpad_down) {
+                temp1.setPower(1);
+                temp2.setPower(1);
+
+            }
+            else if (gamepad1.dpad_down)
+            {
                 //Go Backward
-                temp1.setPower(-0.3);
-            }else if (gamepad1.dpad_right) {
+                temp1.setPower(-1);
+                temp2.setPower(-1);
+            }
+            else if (gamepad1.dpad_right)
+            {
                 temp2.setPower(0.3);
-            } else if (gamepad1.dpad_left) {
+            }
+                else if (gamepad1.dpad_left)
+            {
                 temp2.setPower(-0.3);
-            }   else {
+            }
+            else if (gamepad2.left_bumper) {
+                TempS1.setPower(0.79);
+            }
+            else if (gamepad2.right_bumper) {
+                //spinnerServo.setPower(1);
+                TempS1.setPower(-0.79);
+            }
+            else {
                 temp1.setPower(0);
                 temp2.setPower(0);
+                TempS1.setPower(0);
 
             }
         }
