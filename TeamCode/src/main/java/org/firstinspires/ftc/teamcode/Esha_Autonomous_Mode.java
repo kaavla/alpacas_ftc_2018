@@ -41,33 +41,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-/**
- * This file illustrates the concept of driving a path based on encoder counts.
- * It uses the common Pushbot hardware class to define the drive on the robot.
- * The code is structured as a LinearOpMode
- *
- * The code REQUIRES that you DO have encoders on the wheels,
- *   otherwise you would use: PushbotAutoDriveByTime;
- *
- *  This code ALSO requires that the drive Motors have been configured such that a positive
- *  power command moves them forwards, and causes the encoders to count UP.
- *
- *   The desired path in this example is:
- *   - Drive forward for 48 inches
- *   - Spin right for 12 Inches
- *   - Drive Backwards for 24 inches
- *   - Stop and close the claw.
- *
- *  The code is written using a method called: encoderDrive(speed, leftInches, rightInches, timeoutS)
- *  that performs the actual movement.
- *  This methods assumes that each movement is relative to the last stopping place.
- *  There are other ways to perform encoder based moves, but this method is probably the simplest.
- *  This code uses the RUN_TO_POSITION mode to enable the Motor controllers to generate the run profile
- *
- * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
- */
-
 @Autonomous(name="Esha_Autonomous_Mode", group="Esha")
 //@Disabled
 public class Esha_Autonomous_Mode extends LinearOpMode {
@@ -132,26 +105,7 @@ public class Esha_Autonomous_Mode extends LinearOpMode {
         //3 - strafe left
 
         //myLanderLift(4,TURN_SPEED,6.25,7.25);
-        myLanderLift(4, 1, 6, 7.0);
-        myEncoderDrive(3,DRIVE_SPEED,7,5.0);
-        //myEncoderDrive(3, 0.5, 7, 10.0);
-        //myEncoderDrive(2, 0.5, 30, 10.0);
 
-        myEncoderDrive(0, DRIVE_SPEED, 30, 10.0);
-        //rotate(100, TURN_SPEED);
-        rotate(107, TURN_SPEED);
-        //myEncoderDrive(0, DRIVE_SPEED, 38, 10.0);
-        myEncoderDrive(0, DRIVE_SPEED, 84, 10.0);
-        //rotate(30, TURN_SPEED);
-        //myEncoderDrive(0, DRIVE_SPEED, 55, 10.0);
-        rotate(5, TURN_SPEED);
-        robot.markerServo.setPosition(-0.9);
-        myEncoderDrive(3,DRIVE_SPEED,9,5.0);
-        rotate(7, TURN_SPEED);
-        myEncoderDrive(1, DRIVE_SPEED, 70, 10.0);
-        rotate(15, TURN_SPEED);
-        myEncoderDrive(1, DRIVE_SPEED, 13, 10.0);
-        myLanderLift(5,TURN_SPEED,6,7.25);
         // rotate(10,TURN_SPEED);
         //myEncoderDrive(1,DRIVE_SPEED,10,5.0);
 
