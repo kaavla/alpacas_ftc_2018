@@ -91,8 +91,8 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         //int detectionPosition = ADDPOSITIONHERE
         //myLanderLift(0, 1, 6, 7.0);
         //myEncoderDrive(3, 0.3, 5, 5.0);
-        myDetectionTest(3, robot.DRIVE_SPEED, 40.0);
-        myDetectionRun(3, robot.DRIVE_SPEED, 40.0);
+        myDetectionTest(2, robot.DRIVE_SPEED, 40.0);
+        myDetectionRun(2, robot.DRIVE_SPEED, 40.0);
         //use position number to determine routes above
 
 
@@ -152,18 +152,22 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                myEncoderDrive(3, robot.DRIVE_SPEED, 14, 10.0);
-                myEncoderDrive(0, robot.DRIVE_SPEED, 8, 10.0);
-                myEncoderDrive(3, robot.DRIVE_SPEED, 14, 10.0);
+                myEncoderDrive(3, robot.DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 14, 10.0);
+                rotate(80, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.TURN_SPEED, 13, 10.0);
             }
             else if (position == 3)
             {
-                myEncoderDrive(3, robot.DRIVE_SPEED, 14, 5.0);
-                myEncoderDrive(1, robot.DRIVE_SPEED, 8, 10.0);
-                myEncoderDrive(3, robot.TURN_SPEED, 14, 10.0);
+                myEncoderDrive(3, robot.DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(1, robot.DRIVE_SPEED, 14, 10.0);
+                rotate(70, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.TURN_SPEED, 13, 10.0);
             } else // Position = 2 and default position
             {
-                myEncoderDrive(3, robot.DRIVE_SPEED, 28, 10.0);
+                myEncoderDrive(3, robot.DRIVE_SPEED, 16, 10.0);
+                rotate(90, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 10, 10.0);
             }
 
 
@@ -233,36 +237,35 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                myEncoderDrive(3, robot.DRIVE_SPEED, 10, 10.0);
-                rotate(70, robot.TURN_SPEED);
-                myEncoderDrive(3, 10, robot.DRIVE_SPEED, 10.0);
-                rotate(45, robot.TURN_SPEED);
-                myEncoderDrive(3, robot.DRIVE_SPEED, 15, 10.0);
+                myEncoderDrive(0, robot.TURN_SPEED, 20, 10.0);
+                rotate(30, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 20, 10.0);
+                rotate(79, robot.TURN_SPEED);
                 //robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
-                myEncoderDrive(2, robot.DRIVE_SPEED, 60, 10.0);
-                rotate(10, robot.TURN_SPEED);
-                myEncoderDrive(3, robot.DRIVE_SPEED, 13, 10.0);
+                //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 67, 10.0);
+                rotate(-14, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 8, 10.0);
             }
             else if (position == 3)
             {
-                myEncoderDrive(3, robot.TURN_SPEED, 22, 10.0);
-                rotate(40, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.TURN_SPEED, 20, 10.0);
+                rotate(-30, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 10, 10.0);
                 //robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
-                rotate(-90, robot.TURN_SPEED);
-                myEncoderDrive(2, robot.DRIVE_SPEED, 60, 10.0);
-                rotate(10, robot.TURN_SPEED);
-                myEncoderDrive(3, robot.DRIVE_SPEED, 13, 10.0);
+                //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
+                myEncoderDrive(1, robot.DRIVE_SPEED, 60, 10.0);
+                rotate(-14, robot.TURN_SPEED);
+                myEncoderDrive(1, robot.DRIVE_SPEED, 8, 10.0);
             } else // Position = 2 also default position
             {
-                myEncoderDrive(3, robot.DRIVE_SPEED, 40, 10.0);
-                rotate(45, robot.TURN_SPEED);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 30, 10.0);
+                rotate(-45, robot.TURN_SPEED);
                 //robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
-                myEncoderDrive(2, robot.DRIVE_SPEED, 60, 10.0);
-                rotate(10, robot.TURN_SPEED);
-                myEncoderDrive(3, robot.DRIVE_SPEED, 13, 10.0);
+                myEncoderDrive(3, robot.DRIVE_SPEED, 2, 10.0);
+                myEncoderDrive(1, robot.DRIVE_SPEED, 60, 10.0);
+                rotate(-14, robot.TURN_SPEED);
+                myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
             }
 
 
