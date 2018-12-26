@@ -9,19 +9,27 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
+enum Direction
+{
+    FORWARD, BACKWARD, STRAFE_RIGHT, STRAFE_LEFT;
+}
 //@Autonomous(name="CallistoAutonomousBase", group="Callisto")
 //@Disabled
 public class CallistoAutonomousBase extends LinearOpMode {
 
-    private CallistoHW  robot      = new CallistoHW();
+    public CallistoHW  robot       = new CallistoHW();
     private ElapsedTime runtime    = new ElapsedTime();
     private Orientation lastAngles = new Orientation();
     private double globalAngle     = 0;
+    public Direction direction;
 
     static final double COUNTS_PER_MOTOR_REV  = 1440;    // eg: TETRIX Motor Encoder
     static final double DRIVE_GEAR_REDUCTION  = 1.0;     // This is < 1.0 if geared UP
     static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
     static final double COUNTS_PER_INCH       = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415);
+
+    static final double DRIVE_SPEED           = 0.7;
+    static final double TURN_SPEED            = 0.8;
 
     @Override
     public void runOpMode() {
@@ -31,6 +39,12 @@ public class CallistoAutonomousBase extends LinearOpMode {
     public void initHW()
     {
         robot.init(hardwareMap);
+        initMotorEncoders();
+    }
+
+
+    public void initMotorEncoders()
+    {
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.backrightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -40,10 +54,9 @@ public class CallistoAutonomousBase extends LinearOpMode {
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
-
-
-    public void myEncoderDrive(int direction,
+    public void myEncoderDrive(Direction direction,
                                double speed,
                                double Inches,
                                double timeoutS) {
@@ -62,26 +75,26 @@ public class CallistoAutonomousBase extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            if (direction == 0) {
+            if (direction == Direction.FORWARD) {
                 //Go forward
                 newLeftTarget      = robot.rightMotor.getCurrentPosition()     + (int) (Inches * COUNTS_PER_INCH);
                 newRightTarget     = robot.leftMotor.getCurrentPosition()      + (int) (Inches * COUNTS_PER_INCH);
                 newLeftBackTarget  = robot.backrightMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition()  + (int) (Inches * COUNTS_PER_INCH);
-            } else if (direction == 1) {
+            } else if (direction == Direction.BACKWARD) {
                 //Go backward
                 newLeftTarget      = robot.rightMotor.getCurrentPosition()     + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newRightTarget     = robot.leftMotor.getCurrentPosition()      + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newLeftBackTarget  = robot.backrightMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition()  + (int) (-1 * Inches * COUNTS_PER_INCH);
-            } else if (direction == 2) {
+            } else if (direction == Direction.STRAFE_RIGHT) {
                 //Strafe Right
                 newLeftTarget      = robot.rightMotor.getCurrentPosition()     + (int) (Inches * COUNTS_PER_INCH);
                 newRightTarget     = robot.leftMotor.getCurrentPosition()      + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newLeftBackTarget  = robot.backrightMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition()  + (int) (Inches * COUNTS_PER_INCH);
 
-            } else if (direction == 3) {
+            } else if (direction == Direction.STRAFE_LEFT) {
                 //Strafe Left
                 newLeftTarget      = robot.rightMotor.getCurrentPosition()     + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newRightTarget     = robot.leftMotor.getCurrentPosition()      + (int) (Inches * COUNTS_PER_INCH);
@@ -177,7 +190,7 @@ public class CallistoAutonomousBase extends LinearOpMode {
         return globalAngle;
     }
 
-    private void rotate(int degrees, double power) {
+    public void rotate(int degrees, double power) {
 
         // restart imu movement tracking.
         resetAngle();
@@ -215,5 +228,33 @@ public class CallistoAutonomousBase extends LinearOpMode {
         resetAngle();
     }
 
+    public void myDetectionTest (int position,
+                                  double speed,
+                                  double timeoutS) {
 
+        // Ensure that the op mode is still active
+        if (opModeIsActive()) {
+
+            // Determine new target position, and pass to motor controller
+            if (position == 1)
+            {
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 14, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 8, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 14, 10.0);
+            }
+            else if (position == 3)
+            {
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 14, 5.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 8, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, TURN_SPEED, 14, 10.0);
+            } else // Position = 2 and default position
+            {
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 28, 10.0);
+            }
+
+        }
     }
+
+
+
+}
