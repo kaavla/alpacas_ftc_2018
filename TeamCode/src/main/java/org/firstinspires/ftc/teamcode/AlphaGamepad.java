@@ -34,6 +34,7 @@ public class AlphaGamepad extends LinearOpMode {
     private CRServo spinnerServo = null;
     private Servo trayServo = null;
     private Servo markerServo = null;
+    public float left_stick_x;
 
 
 
@@ -78,13 +79,57 @@ public class AlphaGamepad extends LinearOpMode {
             telemetry.addData("Motors", "FL(%.1f),FR(%.1f),BL(%.1f),BR(%.1f), count(%d)", motor_power, motor_power, motor_power, motor_power, count);
             telemetry.update();
 
+
             if (gamepad1.dpad_up) {
                 //Go Forward
                 leftMotor.setPower(motor_power);
                 rightMotor.setPower(motor_power);
                 backleftMotor.setPower(motor_power);
                 backrightMotor.setPower(motor_power);
-            } else if (gamepad1.dpad_down) {
+            }
+            else if (gamepad1.left_stick_y < 0)
+            {
+                leftMotor.setPower(motor_power);
+                rightMotor.setPower(motor_power);
+                backleftMotor.setPower(motor_power);
+                backrightMotor.setPower(motor_power);
+            }
+            else if (gamepad1.left_stick_y > 0)
+            {
+                leftMotor.setPower(-1*motor_power);
+                rightMotor.setPower(-1*motor_power);
+                backleftMotor.setPower(-1*motor_power);
+                backrightMotor.setPower(-1*motor_power);
+            }
+            else if (gamepad1.left_stick_x < 0)
+            {
+                leftMotor.setPower(-1*motor_power);
+                rightMotor.setPower(motor_power);
+                backleftMotor.setPower(-1*motor_power);
+                backrightMotor.setPower(motor_power);
+            }
+            else if (gamepad1.left_stick_x > 0)
+            {
+                leftMotor.setPower(motor_power);
+                rightMotor.setPower(-1*motor_power);
+                backleftMotor.setPower(motor_power);
+                backrightMotor.setPower(-1*motor_power);
+            }
+            else if (gamepad1.right_stick_x > 0)
+            {
+                leftMotor.setPower(motor_power);
+                rightMotor.setPower(-1*motor_power);
+                backleftMotor.setPower(-1*motor_power);
+                backrightMotor.setPower(motor_power);
+            }
+            else if (gamepad1.right_stick_x < 0)
+            {
+                leftMotor.setPower(-1*motor_power);
+                rightMotor.setPower(motor_power);
+                backleftMotor.setPower(motor_power);
+                backrightMotor.setPower(-1*motor_power);
+            }
+            else if (gamepad1.dpad_down) {
                 //Go Backward
                 leftMotor.setPower(-1 * motor_power);
                 rightMotor.setPower(-1 * motor_power);
