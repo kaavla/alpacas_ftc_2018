@@ -5,12 +5,19 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
+import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
+
+import java.util.List;
 
 
 @Autonomous(name="TFODAutonomousMihika", group="Mihika")
@@ -39,6 +46,16 @@ public class MihikaTFODAutonomous extends LinearOpMode {
     //1 inch = 1120*20/1.75 ticks
     static final double ROTATIONS_PER_INCH = 11.42;
     static final double TICKS_PER_INCH = (ROTATIONS_PER_INCH * 1120); //may need to update Counts per motor rev because the motor may have a different amount of ticks
+    final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
+    final String LABEL_GOLD_MINERAL = "Gold Mineral";
+    final String LABEL_SILVER_MINERAL = "Silver Mineral";
+    final String VUFORIA_KEY = "AUWa2hP/////AAABmYAEN4JY30WlndAsvgcYjZAcwt/KX4c9VUt+Br3zZxPhIbJ+ovlQrV3YlETOwJ4Q5NajUuwkdpnX2292snWM8iiXzQ2Nm37xl78r82PlDZPAKP8XV+9sBg1KMHO+0zDzTtWNa/fmNPeEhmdff/YWUzcqTmGLnccOhj57waivZa4Y5xDfH4YKssYJUNQKumOd8v5m90IEKYgWghs7BhxpWfQbjzC+3QUKPc7q34V+9W4xQ+2S+hI0inYLrK4rSdiCGU76d8hwlBWuDC8PWrkqwIi6EptTL/nP1rLoWy/Usv6ZUqRRHwkgLNYsrWusN0G5d71F6tdvRDbGdgQKQ2evHWZPPtlVW6u0S5N5S2sXu7R+";
+    TFObjectDetector tfod = null;
+    VuforiaLocalizer vuforia = null;
+    int positionGold;
+
+
+
 
     //static final double     TICKS_PER_INCH          = 16500;
     //14000 - may be the right one - might need to try to check ---for above
@@ -47,6 +64,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
     double globalAngle, power = .30, correction;
     @Override
     public void runOpMode() {
+
 
         /*
          * Initialize the drive system variables.
@@ -58,7 +76,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         telemetry.addData("Status", "Resetting Encoders");    //
         telemetry.update();
 
-        robot.markerServo = hardwareMap.servo.get("markerServo");
+        //robot.markerServo = hardwareMap.servo.get("markerServo");
 
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -80,20 +98,127 @@ public class MihikaTFODAutonomous extends LinearOpMode {
                 robot.backrightMotor.getCurrentPosition());
         telemetry.update();
 
+
+
+
+        /*
+         * IMPORTANT: You need to obtain your own license key to use Vuforia. The string below with which
+         * 'parameters.vuforiaLicenseKey' is initialized is for illustration only, and will not function.
+         * A Vuforia 'Development' license key, can be obtained free of charge from the Vuforia developer
+         * web site at https://developer.vuforia.com/license-manager.
+         *
+         * Vuforia license keys are always 380 characters long, and look as if they contain mostly
+         * random data. As an example, here is a example of a fragment of a valid key:
+         *      ... yIgIzTqZ4mWjk9wd3cZO9T1axEqzuhxoGlfOOI2dRzKS4T0hQ8kT ...
+         * Once you've obtained a license key, copy the string from the Vuforia web site
+         * and paste it in to your code on the next line, between the double quotes.
+         */
+
+        /**
+         * {@link #vuforia} is the variable we will use to store our instance of the Vuforia
+         * localization engine.
+         */
+        VuforiaLocalizer vuforia;
+
+        /**
+         * {@link #tfod} is the variable we will use to store our instance of the Tensor Flow Object
+         * Detection engine.
+         */
+
+        //@Override
+        //public void runOpModex(){
+            // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
+            // first.
+            initVuforia();
+
+            if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
+                 initTfod();
+            } else {
+                telemetry.addData("Sorry!", "This device is not compatible with TFOD");
+            }
+
+            /** Wait for the game to begin */
+            telemetry.addData(">", "Press Play to start tracking");
+            telemetry.update();
+            waitForStart();
+
+            if (opModeIsActive()) {
+                /** Activate Tensor Flow Object Detection. */
+                if (tfod != null) {
+                    tfod.activate();
+                }
+
+                while (opModeIsActive()) {
+                    if (tfod != null) {
+                        // getUpdatedRecognitions() will return null if no new information is available since
+                        // the last time that call was made.
+                        List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
+                        if (updatedRecognitions != null) {
+                            telemetry.addData("# Object Detected", updatedRecognitions.size());
+                            if (updatedRecognitions.size() == 3) {
+                                int goldMineralX = -1;
+                                int silverMineral1X = -1;
+                                int silverMineral2X = -1;
+                                for (Recognition recognition : updatedRecognitions) {
+                                    if (recognition.getLabel().equals(LABEL_GOLD_MINERAL)) {
+                                        goldMineralX = (int) recognition.getLeft();
+                                    } else if (silverMineral1X == -1) {
+                                        silverMineral1X = (int) recognition.getLeft();
+                                    } else {
+                                        silverMineral2X = (int) recognition.getLeft();
+                                    }
+                                }
+                                if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
+                                    if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
+                                        telemetry.addData("Gold Mineral Position", "Left");
+                                        positionGold = 3;
+                                        break;
+                                    } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
+                                        telemetry.addData("Gold Mineral Position", "Right");
+                                        positionGold = 1;
+                                        break;
+                                    } else {
+                                        telemetry.addData("Gold Mineral Position", "Center");
+                                        positionGold = 2;
+                                        break;
+                                    }
+                                }
+                            }
+                            telemetry.update();
+                        }
+                    }
+                }
+            }
+
+            if (tfod != null) {
+                tfod.shutdown();
+            }
+        //}
+
+        /**
+         * Initialize the Vuforia localization engine.
+         */
+
+        
+
         // Wait for the game to start (driver presses PLAY)
-        waitForStart();
+        //waitForStart();
 
 
 
         //0,2,1,3
-        //add sensing in here
-        //get position #
+        //add sensing in here - done
+        //get position # - done
         //int detectionPosition = ADDPOSITIONHERE
-        //myLanderLift(0, 1, 6, 7.0);
+        myLanderLift(0, 1, 7, 9.0);
+        ///For above, you will need to check how many seconds
+        //it takes from where we are starting to all the way out
         //myEncoderDrive(3, 0.3, 5, 5.0);
-        myDetectionTest(2, robot.DRIVE_SPEED, 40.0);
-        myDetectionRun(2, robot.DRIVE_SPEED, 40.0);
+        myDetectionTest(positionGold, robot.DRIVE_SPEED, 40.0);
+        myDetectionRun(positionGold, robot.DRIVE_SPEED, 40.0);
         //use position number to determine routes above
+        myLanderLift(1, 1, 6, 7.0);
+
 
 
 
@@ -116,7 +241,6 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         //rotate(10, robot.TURN_SPEED);
         //myEncoderDrive(1, robot.DRIVE_SPEED, 13,7.0);
         //park in crater
-        myLanderLift(1, 1, 6, 7.0);
 
 /*
         myEncoderDrive(0, DRIVE_SPEED  D, 24, 24,5.0);
@@ -133,6 +257,36 @@ public class MihikaTFODAutonomous extends LinearOpMode {
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
+    }
+
+
+
+
+
+    private void initVuforia() {
+        /*
+         * Configure Vuforia by creating a Parameter object, and passing it to the Vuforia engine.
+         */
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
+
+        parameters.vuforiaLicenseKey = VUFORIA_KEY;
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
+
+        //  Instantiate the Vuforia engine
+        vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
+        // Loading trackables is not necessary for the Tensor Flow Object Detection engine.
+    }
+
+    /**
+     * Initialize the Tensor Flow Object Detection engine.
+     */
+    private void initTfod() {
+        int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
+                "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
+        tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
+        tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
     }
 
     private void myDetectionTest (int position,
@@ -244,7 +398,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
                 //robot.markerServo.setPosition(-0.9);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
                 myEncoderDrive(0, robot.DRIVE_SPEED, 67, 10.0);
-                rotate(-14, robot.TURN_SPEED);
+                //rotate(-14, robot.TURN_SPEED);
                 myEncoderDrive(0, robot.DRIVE_SPEED, 8, 10.0);
             }
             else if (position == 3)
@@ -255,7 +409,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
                 //robot.markerServo.setPosition(-0.9);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
                 myEncoderDrive(1, robot.DRIVE_SPEED, 60, 10.0);
-                rotate(-14, robot.TURN_SPEED);
+                //rotate(-14, robot.TURN_SPEED);
                 myEncoderDrive(1, robot.DRIVE_SPEED, 8, 10.0);
             } else // Position = 2 also default position
             {
