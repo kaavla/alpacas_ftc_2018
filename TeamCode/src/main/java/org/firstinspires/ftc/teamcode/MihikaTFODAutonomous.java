@@ -209,8 +209,8 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         //0,2,1,3
         //add sensing in here - done
         //get position # - done
-        //int detectionPosition = ADDPOSITIONHERE
-        myLanderLift(0, 1, 7, 9.0);
+        //int detectionPosition = ADDPOSITIONHERE - done above somewhere
+        myLanderLift(0, 1, 7.5, 10.0);
         ///For above, you will need to check how many seconds
         //it takes from where we are starting to all the way out
         //myEncoderDrive(3, 0.3, 5, 5.0);
@@ -309,14 +309,14 @@ public class MihikaTFODAutonomous extends LinearOpMode {
                 myEncoderDrive(3, robot.DRIVE_SPEED, 16, 10.0);
                 myEncoderDrive(0, robot.DRIVE_SPEED, 14, 10.0);
                 rotate(80, robot.TURN_SPEED);
-                myEncoderDrive(0, robot.TURN_SPEED, 13, 10.0);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 13, 10.0);
             }
             else if (position == 3)
             {
                 myEncoderDrive(3, robot.DRIVE_SPEED, 16, 10.0);
                 myEncoderDrive(1, robot.DRIVE_SPEED, 14, 10.0);
                 rotate(70, robot.TURN_SPEED);
-                myEncoderDrive(0, robot.TURN_SPEED, 13, 10.0);
+                myEncoderDrive(0, robot.DRIVE_SPEED, 13, 10.0);
             } else // Position = 2 and default position
             {
                 myEncoderDrive(3, robot.DRIVE_SPEED, 16, 10.0);
@@ -370,7 +370,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
@@ -397,7 +397,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
                 rotate(79, robot.TURN_SPEED);
                 //robot.markerServo.setPosition(-0.9);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
-                myEncoderDrive(0, robot.DRIVE_SPEED, 67, 10.0);
+                myEncoderDrive(0, 0.95, 67, 10.0);
                 //rotate(-14, robot.TURN_SPEED);
                 myEncoderDrive(0, robot.DRIVE_SPEED, 8, 10.0);
             }
@@ -406,19 +406,19 @@ public class MihikaTFODAutonomous extends LinearOpMode {
                 myEncoderDrive(0, robot.TURN_SPEED, 20, 10.0);
                 rotate(-30, robot.TURN_SPEED);
                 myEncoderDrive(0, robot.DRIVE_SPEED, 10, 10.0);
-                //robot.markerServo.setPosition(-0.9);
+                //roboderDt.markerServo.setPosition(-0.9);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
-                myEncoderDrive(1, robot.DRIVE_SPEED, 60, 10.0);
+                myEncoderDrive(1, 0.95, 60, 10.0);
                 //rotate(-14, robot.TURN_SPEED);
                 myEncoderDrive(1, robot.DRIVE_SPEED, 8, 10.0);
             } else // Position = 2 also default position
             {
                 myEncoderDrive(0, robot.DRIVE_SPEED, 26, 10.0);
-                rotate(-49, robot.TURN_SPEED);
+                rotate(-43, robot.TURN_SPEED);
                 //robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(1, robot.DRIVE_SPEED, 35, 10.0);
-                myEncoderDrive(2, robot.DRIVE_SPEED, 3, 10.0);
-                myEncoderDrive(1, robot.DRIVE_SPEED, 33, 10.0);
+                myEncoderDrive(1, 0.95, 35, 10.0);
+                //myEncoderDrive(2, 0.9, 3, 10.0);
+                myEncoderDrive(1, 0.95, 33, 10.0);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 20, 10.0);
                 //rotate(-14, robot.TURN_SPEED);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
@@ -470,7 +470,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
