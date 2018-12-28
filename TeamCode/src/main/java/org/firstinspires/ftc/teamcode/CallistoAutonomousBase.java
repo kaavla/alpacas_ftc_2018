@@ -82,6 +82,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
+
     }
 
     private void initTfod()
