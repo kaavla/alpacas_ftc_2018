@@ -15,6 +15,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase {
 
     @Override
     public void runOpMode() {
+        int positionGold = 2;
         /*
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
@@ -28,8 +29,10 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        myDetectionTest(3, DRIVE_SPEED, 40.0);
-        myDetectionRun(3,  DRIVE_SPEED, 40.0);
+        positionGold = myTFOD(2);
+        myLanderLift(0, 1, 7, 9.0);
+        myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
+        myDetectionRun(positionGold,  DRIVE_SPEED, 40.0);
 
         sleep(1000);     // pause for servos to move
 
@@ -59,7 +62,6 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase {
                 myEncoderDrive(Direction.STRAFE_LEFT, 10, DRIVE_SPEED, 10.0);
                 rotate(45, TURN_SPEED);
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 15, 10.0);
-                //markerServo.setPosition(-0.9);
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 2, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 60, 10.0);
                 rotate(10, TURN_SPEED);

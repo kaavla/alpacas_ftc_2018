@@ -20,7 +20,7 @@ public class CallistoHW {
 
     public BNO055IMU imu          = null;
 
-    private DcMotor MLanderLift = null;
+    public DcMotor MLanderLift = null;
 
     private ElapsedTime period = new ElapsedTime();
 
@@ -33,6 +33,7 @@ public class CallistoHW {
         backleftMotor    = ahwMap.get(DcMotor.class, "MBackLeft");
         backrightMotor   = ahwMap.get(DcMotor.class, "MBackRight");
         MLanderLift      = ahwMap.get(DcMotor.class, "MLanderLift");
+        imu              = ahwMap.get(BNO055IMU.class, "imu");
 
         //initialize the IMU
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
