@@ -253,7 +253,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         */
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
         //robot.rightClaw.setPosition(0.0);
-        sleep(1000);     // pause for servos to move
+        sleep(50);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -326,7 +326,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
 
 
 
-
+/**
             // Turn On RUN_TO_POSITION
             robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -369,7 +369,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+*/
             sleep(50);   // optional pause after each move
         }
     }
@@ -414,11 +414,11 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             } else // Position = 2 also default position
             {
                 myEncoderDrive(0, robot.DRIVE_SPEED, 26, 10.0);
-                rotate(-43, robot.TURN_SPEED);
+                rotate(-42, robot.TURN_SPEED);
                 //robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(1, 0.95, 35, 10.0);
+                myEncoderDrive(1, 0.95, 68, 10.0);
                 //myEncoderDrive(2, 0.9, 3, 10.0);
-                myEncoderDrive(1, 0.95, 33, 10.0);
+                //myEncoderDrive(1, 0.95, 33, 10.0);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 20, 10.0);
                 //rotate(-14, robot.TURN_SPEED);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
@@ -426,7 +426,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
 
 
 
-
+/**
             // Turn On RUN_TO_POSITION
             robot.leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -469,7 +469,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
+*/
             sleep(50);   // optional pause after each move
         }
     }
@@ -540,7 +540,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             // Turn off RUN_TO_POSITION
             robot.landerLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
@@ -655,7 +655,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
     /**
@@ -745,7 +745,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         robot.backrightMotor.setPower(power);
 
         // wait for rotation to stop.
-        sleep(1000);
+        sleep(50);
 
         // reset angle tracking on new heading.
         robot.resetAngle();
