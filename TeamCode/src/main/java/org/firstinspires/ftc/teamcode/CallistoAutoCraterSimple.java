@@ -53,20 +53,9 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            if (position == 1)
-            {
+            if (position == 1) {
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 7, 10.0);
-                //  rotate(30, robot.TURN_SPEED);
-                //myEncoderDrive(0, robot.DRIVE_SPEED, 20, 10.0);
-                //rotate(79, robot.TURN_SPEED);
-                //robot.markerServo.setPosition(-0.9);
-                //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
-                //myEncoderDrive(0, robot.DRIVE_SPEED, 67, 10.0);
-                //rotate(-14, robot.TURN_SPEED);
-                //myEncoderDrive(0, robot.DRIVE_SPEED, 8, 10.0);
-            }
-            else if (position == 3)
-            {
+            } else if (position == 3) {
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 7, 10.0);
                 //rotate(-30, robot.TURN_SPEED);
                 //myEncoderDrive(0, robot.DRIVE_SPEED, 10, 10.0);
@@ -86,5 +75,6 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
             }
         }
+    }
 }
 

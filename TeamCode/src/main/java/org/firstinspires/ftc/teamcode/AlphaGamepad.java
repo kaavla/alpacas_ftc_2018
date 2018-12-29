@@ -17,7 +17,6 @@ import com.qualcomm.robotcore.util.Range;
 @TeleOp(name="M_A_Gamepad Linear OpMode", group="Linear Opmode")
 //@Disabled
 public class AlphaGamepad extends LinearOpMode {
-
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     //  private DcMotor leftDrive = null;
@@ -31,11 +30,10 @@ public class AlphaGamepad extends LinearOpMode {
     private DcMotor MCollectionLift = null;
     private DcMotor MDropLift = null;
     private DcMotor MLanderLift = null;
-    private CRServo spinnerServo = null;
-    private Servo trayServo = null;
-    private Servo markerServo = null;
+    //private CRServo spinnerServo = null;
+    //private Servo trayServo = null;
+    //private Servo markerServo = null;
     public float left_stick_x;
-
 
 
 
@@ -59,9 +57,9 @@ public class AlphaGamepad extends LinearOpMode {
         MCollectionLift = hardwareMap.get(DcMotor.class, "MCollectionLift");
         MDropLift = hardwareMap.get(DcMotor.class, "MDropLift");
         MLanderLift = hardwareMap.get(DcMotor.class, "MLanderLift");
-        spinnerServo = hardwareMap.crservo.get("spinnerServo");
-        trayServo = hardwareMap.servo.get("trayServo");
-        markerServo = hardwareMap.servo.get("markerServo");
+        //spinnerServo = hardwareMap.crservo.get("spinnerServo");
+        //trayServo = hardwareMap.servo.get("trayServo");
+        //markerServo = hardwareMap.servo.get("markerServo");
 
 
 
@@ -231,17 +229,17 @@ public class AlphaGamepad extends LinearOpMode {
                 MDropLift.setPower(-0.6);
             }
             else if (gamepad2.left_bumper) {
-                spinnerServo.setPower(0.79);
+                //spinnerServo.setPower(0.79);
             }
             else if (gamepad2.right_bumper) {
                 //spinnerServo.setPower(1);
-                spinnerServo.setPower(-0.79);
+                //spinnerServo.setPower(-0.79);
             }
             else if (gamepad2.x) {
-                trayServo.setPosition(0.7);
+                //trayServo.setPosition(0.7);
             }
             else if (gamepad2.b) {
-                trayServo.setPosition(0);
+                //trayServo.setPosition(0);
             }
             else {
                 leftMotor.setPower(0);
@@ -252,7 +250,7 @@ public class AlphaGamepad extends LinearOpMode {
                 MCollectionLift.setPower(0);
                 MCollectionSlide.setPower(0);
                 MDropLift.setPower(0);
-                spinnerServo.setPower(0);
+                //spinnerServo.setPower(0);
                 //trayServo.setPosition(0);
                 MLanderLift.setPower(0);
 

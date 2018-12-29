@@ -82,7 +82,7 @@ public class CallistoManual extends LinearOpMode
             } else if (gamepad1.a)
             {
                 robotCallisto.backwardSlow(slow_motor_power);
-            } else if (gamepad1.left_stick_button)
+            } else if (gamepad1.left_trigger> 0.7)
             {
                 robotCallisto.landerliftUp(1);
             } else if (gamepad1.right_trigger > 0.7)
