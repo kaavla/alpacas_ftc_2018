@@ -57,7 +57,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
             telemetry.addData("Status", "Resetting Encoders");    //
             telemetry.update();
 
-            robot.markerServo = hardwareMap.servo.get("markerServo");
+            //robot.markerServo = hardwareMap.servo.get("markerServo");
 
             robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -94,7 +94,7 @@ public class Mihika_AutonomousMode extends LinearOpMode {
             //myLanderLift(2, 0.6, 5, 0.5);
             //spinnerServo.setPower(0.79);
             rotate(20, robot.TURN_SPEED);
-            robot.markerServo.setPosition(-0.9);
+            //robot.markerServo.setPosition(-0.9);
             rotate(10, robot.TURN_SPEED);
             myEncoderDrive(3, 0.3, 5, 5.0);
             myLanderLift(1, 1, 1, 1);

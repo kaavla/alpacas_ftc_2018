@@ -145,7 +145,7 @@ public class Esha_Autonomous_Mode extends LinearOpMode {
         //rotate(30, TURN_SPEED);
         //myEncoderDrive(0, DRIVE_SPEED, 55, 10.0);
         rotate(5, TURN_SPEED);
-        robot.markerServo.setPosition(-0.9);
+        //robot.markerServo.setPosition(-0.9);
         myEncoderDrive(3,DRIVE_SPEED,9,5.0);
         rotate(7, TURN_SPEED);
         myEncoderDrive(1, DRIVE_SPEED, 70, 10.0);

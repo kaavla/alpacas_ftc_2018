@@ -51,6 +51,8 @@ public class MihikaTensorFlowObjectDetectionTest extends LinearOpMode {
     public void runOpMode() {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
+        int positionGold;
+
         initVuforia();
 
         if (ClassFactory.getInstance().canCreateTFObjectDetector()) {
@@ -93,10 +95,13 @@ public class MihikaTensorFlowObjectDetectionTest extends LinearOpMode {
                             if (goldMineralX != -1 && silverMineral1X != -1 && silverMineral2X != -1) {
                                 if (goldMineralX < silverMineral1X && goldMineralX < silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Left");
+                                    positionGold = 3;
                                 } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X) {
                                     telemetry.addData("Gold Mineral Position", "Right");
+                                    positionGold = 1;
                                 } else {
                                     telemetry.addData("Gold Mineral Position", "Center");
+                                    positionGold = 2;
                                 }
                             }
                         }

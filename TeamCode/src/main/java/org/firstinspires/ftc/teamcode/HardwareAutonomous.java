@@ -69,8 +69,8 @@ public class HardwareAutonomous
     public BNO055IMU imu;
     public DcMotor  landerLift           = null;
     public DcMotor  collectionLift       = null;
-    public Servo markerServo = null;
-    public CRServo spinnerServo = null;
+    //public Servo markerServo = null;
+    //public CRServo spinnerServo = null;
     public ElapsedTime runtime = new ElapsedTime();
 
     static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
@@ -141,8 +141,8 @@ public class HardwareAutonomous
         backleftMotor     = hwMap.get(DcMotor.class, "MBackLeft");
         landerLift        = hwMap.get(DcMotor.class, "MLanderLift");
         collectionLift    = hwMap.get(DcMotor.class, "MCollectionLift");
-        markerServo       = hwMap.get(Servo.class, "markerServo");
-        spinnerServo      = hwMap.get(CRServo.class, "spinnerServo");
+        //markerServo       = hwMap.get(Servo.class, "markerServo");
+        //spinnerServo      = hwMap.get(CRServo.class, "spinnerServo");
         imu               = hwMap.get(BNO055IMU .class, "imu");
         ElapsedTime runtime = new ElapsedTime();
 
