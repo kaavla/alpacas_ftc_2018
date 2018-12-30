@@ -14,25 +14,19 @@ import com.qualcomm.robotcore.util.Range;
 
 public class CallistoManual extends LinearOpMode
 {
-
     CallistoHW robotCallisto = new CallistoHW();
-    // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
-    //  private DcMotor leftDrive = null;
-    // private DcMotor rightDrive = null;
 
 
     @Override
     public void runOpMode()
     {
-
-        //double motor_power = 0.5;
+        //This is where we set our motor powers
         double motor_power = 0.7;
-        double slow_motor_power = 0.2;
-        double fast_motor_power = 0.7;
-        int count = 0;
+
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+
         robotCallisto.init(hardwareMap);
 
         waitForStart();
@@ -42,9 +36,7 @@ public class CallistoManual extends LinearOpMode
         while (opModeIsActive())
         {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "FL(%.1f),FR(%.1f),BL(%.1f),BR(%.1f), count(%d)", motor_power, motor_power, motor_power, motor_power, count);
             telemetry.update();
-
 
             if (gamepad1.left_stick_y < 0)
             {
@@ -78,24 +70,50 @@ public class CallistoManual extends LinearOpMode
                 robotCallisto.diagonalbackwardsRight(motor_power);
             } else if (gamepad1.y)
             {
-                robotCallisto.forwardSlow(slow_motor_power);
+                robotCallisto.forwardSlow();
             } else if (gamepad1.a)
             {
-                robotCallisto.backwardSlow(slow_motor_power);
-            } else if (gamepad1.left_stick_button)
+                robotCallisto.backwardSlow();
+            } else if (gamepad1.x)
             {
                 robotCallisto.landerliftUp(1);
-            } else if (gamepad1.right_trigger > 0.7)
+            } else if (gamepad1.b)
             {
-                robotCallisto.landerliftDown(-1);
-            }
-             else
+                robotCallisto.landerliftDown(1);
+            } else if (gamepad2.dpad_up)
+            {
+                robotCallisto.pullarmout(motor_power);
+            } else if (gamepad2.dpad_down)
+            {
+                robotCallisto.pullarmin(motor_power);
+            } else if (gamepad2.dpad_left)
+            {
+                robotCallisto.movearmup(motor_power);
+            } else if (gamepad2.dpad_right)
+            {
+                robotCallisto.movearmdown(motor_power);
+            } else if (gamepad2.left_bumper)
+            {
+                robotCallisto.turnspinnerservoforward(motor_power);
+            } else if (gamepad2.right_bumper)
+            {
+                robotCallisto.turnspinnerservobacwards(motor_power);
+            } else if (gamepad2.b)
+            {
+                robotCallisto.turnboxtocollect();
+            } else if (gamepad2.y)
+            {
+                robotCallisto.turnboxtogotolander();
+            } else if (gamepad2.x)
+            {
+                robotCallisto.turnboxtodrop();
+            } else
             {
                 robotCallisto.stopAllMotors();
             }
+
         }
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", "FL(%.1f),FR(%.1f),BL(%.1f),BR(%.1f), count(%d)", motor_power, motor_power, motor_power, motor_power, count);
         telemetry.update();
     }
 }
