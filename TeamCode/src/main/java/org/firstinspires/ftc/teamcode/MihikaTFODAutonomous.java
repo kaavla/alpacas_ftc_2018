@@ -129,7 +129,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         */
         //robot.leftClaw.setPosition(1.0);            // S4: Stop and close the claw.
         //robot.rightClaw.setPosition(0.0);
-        sleep(1000);     // pause for servos to move
+        sleep(50);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -216,7 +216,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
@@ -316,7 +316,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
@@ -386,7 +386,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             // Turn off RUN_TO_POSITION
             robot.landerLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
@@ -501,7 +501,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
     /**
@@ -591,7 +591,7 @@ public class MihikaTFODAutonomous extends LinearOpMode {
         robot.backrightMotor.setPower(power);
 
         // wait for rotation to stop.
-        sleep(1000);
+        sleep(50);
 
         // reset angle tracking on new heading.
         robot.resetAngle();

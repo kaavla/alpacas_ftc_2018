@@ -176,7 +176,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.backrightMotor.setPower(power);
 
         // wait for rotation to stop.
-        sleep(100);
+        sleep(50);
 
         // reset angle tracking on new heading.
         resetAngle();
@@ -358,7 +358,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(100);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
@@ -424,7 +424,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             // Turn off RUN_TO_POSITION
             robot.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(200);   // optional pause after each move
+            sleep(50);   // optional pause after each move
         }
     }
 
@@ -437,21 +437,26 @@ public class CallistoAutonomousBase extends LinearOpMode
         // Ensure that the op mode is still active
         if (opModeIsActive())
         {
-
+            myLanderLift(0, 1, 7.25, 10.0);
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 14, 10.0);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 8, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 14, 10.0);
-            } else if (position == 3)
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
+                rotate(80, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
+            }
+            else if (position == 3)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 14, 5.0);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 8, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, TURN_SPEED, 14, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 15, 10.0);
+                rotate(70, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
             } else // Position = 2 and default position
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 28, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 16, 10.0);
+                rotate(82 , TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
             }
 
         }
