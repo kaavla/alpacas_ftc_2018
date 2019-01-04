@@ -30,7 +30,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
         waitForStart();
 
         positionGold = myTFOD(2);
-        myLanderLift(0, 1, 7, 9.0);
+        //myLanderLift(0, 1, 7, 9.0);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
 
@@ -54,24 +54,23 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
 
             // Determine new target position, and pass to motor controller
             if (position == 1) {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 7, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED, 15, 10.0);//PERFECT
+                myEncoderDrive(direction.FORWARD,DRIVE_SPEED,18.5,10.0);
+                //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
+                //rotate(-180, TURN_SPEED);
             } else if (position == 3) {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 7, 10.0);
-                //rotate(-30, robot.TURN_SPEED);
-                //myEncoderDrive(0, robot.DRIVE_SPEED, 10, 10.0);
-                //robot.markerServo.setPosition(-0.9);
-                //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
-                //myEncoderDrive(1, robot.DRIVE_SPEED, 60, 10.0);
-                //rotate(-14, robot.TURN_SPEED);
-                //myEncoderDrive(1, robot.DRIVE_SPEED, 8, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
+                myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,21,10.0);
+                myEncoderDrive(direction.FORWARD,DRIVE_SPEED,15,10.0);//changed
+                //rotate(-161, TURN_SPEED);
+                //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,21, 20.0);
+
             } else // Position = 2 also default position
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 7, 40.0);
-                //rotate(-45, robot.TURN_SPEED);
-                //robot.markerServo.setPosition(-0.9);
-                //myEncoderDrive(3, robot.DRIVE_SPEED, 2, 10.0);
-                //myEncoderDrive(1, robot.DRIVE_SPEED, 60, 10.0);
-                //rotate(-14, robot.TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
+                rotate(-180, TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,18.5, 20.0); //PERFECT
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
             }
         }
