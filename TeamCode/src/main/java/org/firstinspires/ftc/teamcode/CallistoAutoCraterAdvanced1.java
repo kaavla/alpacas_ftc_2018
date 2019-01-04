@@ -31,7 +31,6 @@ public class CallistoAutoCraterAdvanced1 extends CallistoAutonomousBase {
         waitForStart();
 
         positionGold = myTFOD(2);
-        myLanderLift(0, 1, 7, 9.0);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
 
@@ -66,8 +65,10 @@ public class CallistoAutoCraterAdvanced1 extends CallistoAutonomousBase {
 
             } else // Position = 2 also default position
             {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 40.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 29, 40.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 12, 40.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 40, 40.0);
+                rotate(125,TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 85, 40.0);
             }
 
         }

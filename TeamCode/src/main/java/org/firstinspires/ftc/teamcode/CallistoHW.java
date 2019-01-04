@@ -190,17 +190,17 @@ public class CallistoHW
 
     public void turnboxtocollect()
     {
-        trayServo.setPosition(0.2);
+        trayServo.setPosition(0.7);
     }
 
     public void turnboxtogotolander()
     {
-        trayServo.setPosition(0.9);
+        trayServo.setPosition(0);
     }
 
     public void turnboxtodrop()
     {
-        trayServo.setPosition(1);
+        trayServo.setPosition(0.3);
     }
 
     public void forwardSlow()
