@@ -424,7 +424,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             // Turn off RUN_TO_POSITION
             robot.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            sleep(50);   // optional pause after each move
+            //sleep(50);   // optional pause after each move
         }
     }
 
@@ -444,7 +444,8 @@ public class CallistoAutonomousBase extends LinearOpMode
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 16, 10.0);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
                 rotate(80, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
+                //myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 11, 10.0);
             }
             else if (position == 3)
             {
