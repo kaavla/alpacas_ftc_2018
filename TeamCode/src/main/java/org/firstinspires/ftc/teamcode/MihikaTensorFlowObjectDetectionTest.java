@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @TeleOp(name = "Mihika TensorFlow Object Detection", group = "Mihika")
-//@Disabled
+@Disabled
 
 public class MihikaTensorFlowObjectDetectionTest extends LinearOpMode {
     private static final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";

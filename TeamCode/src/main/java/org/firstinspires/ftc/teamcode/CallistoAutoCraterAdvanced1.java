@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name = "Callisto Crater Advanced - 1", group = "Callisto")
+//@Autonomous(name = "Callisto Crater Advanced - 1", group = "Callisto")
 //@Disabled
 public class CallistoAutoCraterAdvanced1 extends CallistoAutonomousBase {
 

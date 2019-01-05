@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 @Autonomous(name="AutonomousTestManav", group="Manav")
-//@Disabled
+@Disabled
 public class AutonomousTest extends LinearOpMode {
 
     /* Declare OpMode members. */
