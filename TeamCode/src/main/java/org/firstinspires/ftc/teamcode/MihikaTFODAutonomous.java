@@ -13,8 +13,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 
-@Autonomous(name="TFODAutonomousMihika", group="Mihika")
-
+//@Autonomous(name="TFODAutonomousMihika", group="Mihika")
+//@Disabled
 public class MihikaTFODAutonomous extends LinearOpMode {
 
 

@@ -20,7 +20,7 @@
         import java.util.Locale;
 
 @TeleOp(name = "Mihika:GettingInitialReading", group = "Sensor")
-//@Disabled                            // Uncomment this to add to the opmode list
+@Disabled                            // Uncomment this to add to the opmode list
 public class Mihika_GettingInitialReading extends LinearOpMode
 {
     //----------------------------------------------------------------------------------------------

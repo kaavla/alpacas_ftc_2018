@@ -12,7 +12,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name="AutonomousTestMihika", group="Mihika")
+//@Autonomous(name="AutonomousTestMihika", group="Mihika")
 //@Disabled
 
 public class Mihika_AutonomousMode extends LinearOpMode {

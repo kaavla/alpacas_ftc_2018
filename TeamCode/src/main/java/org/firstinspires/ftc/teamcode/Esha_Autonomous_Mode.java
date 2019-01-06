@@ -69,7 +69,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
  */
 
 @Autonomous(name="Esha_Autonomous_Mode", group="Esha")
-//@Disabled
+@Disabled
 public class Esha_Autonomous_Mode extends LinearOpMode {
 
     /* Declare OpMode members. */

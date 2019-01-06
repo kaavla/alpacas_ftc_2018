@@ -101,13 +101,16 @@ public class CallistoManual extends LinearOpMode
             } else if (gamepad2.b)
             {
                 robotCallisto.turnboxtocollect();
-            } else if (gamepad2.y)
+            }
+            else if (gamepad2.y)
             {
                 robotCallisto.turnboxtogotolander();
-            } else if (gamepad2.x)
+            }
+            else if (gamepad2.x)
             {
                 robotCallisto.turnboxtodrop();
-            } else
+            }
+            else
             {
                 robotCallisto.stopAllMotors();
             }

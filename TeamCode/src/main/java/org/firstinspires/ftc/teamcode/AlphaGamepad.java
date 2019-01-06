@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.util.Range;
 
 
 @TeleOp(name="M_A_Gamepad Linear OpMode", group="Linear Opmode")
-//@Disabled
+@Disabled
 public class AlphaGamepad extends LinearOpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();

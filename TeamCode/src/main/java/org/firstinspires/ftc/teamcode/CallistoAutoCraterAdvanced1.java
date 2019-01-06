@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
-@Autonomous(name = "Callisto Crater Advanced - 1", group = "Callisto")
+//@Autonomous(name = "Callisto Crater Advanced - 1", group = "Callisto")
 //@Disabled
 public class CallistoAutoCraterAdvanced1 extends CallistoAutonomousBase {
 
@@ -31,7 +31,6 @@ public class CallistoAutoCraterAdvanced1 extends CallistoAutonomousBase {
         waitForStart();
 
         positionGold = myTFOD(2);
-        myLanderLift(0, 1, 7, 9.0);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
 
