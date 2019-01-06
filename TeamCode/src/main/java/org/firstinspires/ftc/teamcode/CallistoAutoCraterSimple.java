@@ -53,20 +53,29 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            if (position == 1) {
+            if (position == 1)
+            //right most side when standing near the lander lift
+                {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0);
-                myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED, 15, 10.0);//PERFECT
-                myEncoderDrive(direction.FORWARD,DRIVE_SPEED,18.5,10.0);
+                rotate(-90,TURN_SPEED);
+                myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,16.5,10.0);
+                //myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED, 15, 10.0);//PERFECT
+                //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,18.5,10.0);
                 //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
                 //rotate(-180, TURN_SPEED);
-            } else if (position == 3) {
+            } else if (position == 3)
+            //left most side when standing near the lander lift
+            {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
-                myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,21,10.0);
-                myEncoderDrive(direction.FORWARD,DRIVE_SPEED,15,10.0);//changed
+                rotate(90,TURN_SPEED);
+                myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,16.5,10.0);
+                //myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,21,10.0);
+                //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,15,10.0);//changed
                 //rotate(-161, TURN_SPEED);
                 //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,21, 20.0);
 
             } else // Position = 2 also default position
+            //center
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
                 rotate(-180, TURN_SPEED);

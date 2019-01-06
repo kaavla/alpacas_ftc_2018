@@ -59,6 +59,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
 
             // Determine new target position, and pass to motor controller
             if (position == 1)
+            //gold mineral is right most side when standing near the lander lift
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 12, 10.0);
                 myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED + 0.2,88.5,10.0); //PERFECT
@@ -68,6 +69,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
                 rotate(10,TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,12,10.0);
             } else if (position == 3)
+            //gold mineral on left most side when standing near the lander lift
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 12, 10.0);
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 35.5, 10.0);
@@ -78,6 +80,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,10.5,10.0); // PERFECT
 
             } else // Position = 2 also default position
+            //gold mineral in center
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 10, 10.0);
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 62, 10.0);
@@ -86,6 +89,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,59,10.0);
                 rotate(10,TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,11,10.0);//PERFECT
+
             }
 
         }
