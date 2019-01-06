@@ -39,9 +39,9 @@ public class CallistoHW
         rightMotor = ahwMap.get(DcMotor.class, "MFrontRight");
         backleftMotor = ahwMap.get(DcMotor.class, "MBackLeft");
         backrightMotor = ahwMap.get(DcMotor.class, "MBackRight");
-        MLift1 = ahwMap.get(DcMotor.class, "MLift1");
-        MLift2 = ahwMap.get(DcMotor.class, "MLift2");
-        MOnArm = ahwMap.get(DcMotor.class, "MOnArm");
+        //MLift1 = ahwMap.get(DcMotor.class, "MLift1");
+        //MLift2 = ahwMap.get(DcMotor.class, "MLift2");
+        //MOnArm = ahwMap.get(DcMotor.class, "MOnArm");
         spinnerServo = ahwMap.get(CRServo.class, "spinnerServo");
         trayServo = ahwMap.get(Servo.class, "trayServo");
         MLanderLift = ahwMap.get(DcMotor.class, "MLanderLift");
@@ -59,7 +59,7 @@ public class CallistoHW
         //Invert direction for left motors
         leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backleftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        MLift2.setDirection(DcMotorSimple.Direction.REVERSE);
+        //MLift2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Set all motors to zero power
         stopAllMotors();
@@ -79,9 +79,9 @@ public class CallistoHW
         backrightMotor.setPower(0);
         MLanderLift.setPower(0);
         spinnerServo.setPower(0);
-        MOnArm.setPower(0);
-        MLift1.setPower(0);
-        MLift2.setPower(0);
+        //MOnArm.setPower(0);
+        //MLift1.setPower(0);
+        //MLift2.setPower(0);
     }
 
     public void moveForward(double power)
@@ -158,24 +158,24 @@ public class CallistoHW
 
     public void movearmup(double power)
     {
-        MLift1.setPower(0.7 * power);
-        MLift2.setPower(0.7 * power);
+        //MLift1.setPower(0.7 * power);
+        //MLift2.setPower(0.7 * power);
     }
 
     public void movearmdown(double power)
     {
-        MLift1.setPower(-0.7 * power);
-        MLift2.setPower(-0.7 * power);
+        //MLift1.setPower(-0.7 * power);
+        //MLift2.setPower(-0.7 * power);
     }
 
     public void pullarmout(double power)
     {
-        MOnArm.setPower(power);
+        //MOnArm.setPower(power);
     }
 
     public void pullarmin(double power)
     {
-        MOnArm.setPower(-1 * power);
+        //MOnArm.setPower(-1 * power);
     }
 
     public void turnspinnerservoforward(double power)
