@@ -34,7 +34,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         positionGold = myTFOD(2);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
-        myLanderLift(Direction.ROBOT_UP, 1, 7.5, 12.0);
+        myLanderLift(Direction.ROBOT_UP, 1, 5, 5.0);
 
         sleep(50);     // pause for servos to move
 
@@ -64,7 +64,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 rotate(30, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 18, 10.0);
                 rotate(74, TURN_SPEED);
-                //robot.markerServo.setPosition(-0.9);
+                robot.markerServo.setPosition(-0.9);
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 2, 10.0);
                 myEncoderDrive(Direction.FORWARD, 0.95, 72, 10.0);
                 //rotate(-14, TURN_SPEED);
@@ -74,7 +74,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 20, 10.0);
                 rotate(-30, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 10, 10.0);
-                //roboderDt.markerServo.setPosition(-0.9);
+                robot.markerServo.setPosition(-0.9);
                 //myEncoderDrive(1, DRIVE_SPEED, 2, 10.0);
                 myEncoderDrive(Direction.BACKWARD, 0.95, 69, 10.0);
                 //rotate(-14, TURN_SPEED);
@@ -83,7 +83,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
             {
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 26, 10.0);
                 rotate(-42, TURN_SPEED);
-                //robot.markerServo.setPosition(-0.9);
+                robot.markerServo.setPosition(-0.9);
                 myEncoderDrive(Direction.BACKWARD, 0.95, 69, 10.0);
                 //myEncoderDrive(2, 0.9, 3, 10.0);
                 //myEncoderDrive(Direction.BACKWARD, 0.95, 33, 10.0);
