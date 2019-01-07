@@ -134,6 +134,16 @@ public class CallistoManual extends LinearOpMode
             {
                 robotCallisto.turnTraytocollect();
             }
+            else if (gamepad2.left_stick_button)
+            {
+                robotCallisto.turnMarkerServotoInitPos();
+            }
+            else if (gamepad2.right_stick_button)
+            {
+                robotCallisto.turnMarkerServotoDrop();
+            }
+
+
             else
             {
                 robotCallisto.stopAllMotors();
