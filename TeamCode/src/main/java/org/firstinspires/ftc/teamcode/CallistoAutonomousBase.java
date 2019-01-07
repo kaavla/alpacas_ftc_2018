@@ -17,7 +17,7 @@ import java.util.List;
 
 enum Direction
 {
-    FORWARD, BACKWARD, STRAFE_RIGHT, STRAFE_LEFT;
+    FORWARD, BACKWARD, STRAFE_RIGHT, STRAFE_LEFT, ROBOT_UP, ROBOT_DOWN;
 }
 
 //@Autonomous(name="CallistoAutonomousBase", group="Callisto")
@@ -71,10 +71,10 @@ public class CallistoAutonomousBase extends LinearOpMode
             telemetry.addData("Sorry!", "This device is not compatible with TFOD");
         }
 
-        //if (tfod != null)
-        //{
-        //    tfod.activate();
-       // }
+        if (tfod != null)
+        {
+            tfod.activate();
+       }
     }
 
     private void initVuforia()
@@ -189,10 +189,10 @@ public class CallistoAutonomousBase extends LinearOpMode
         int positionGold = 2;
         runtime.reset();
 
-        if (tfod != null)
-        {
-            tfod.activate();
-        }
+        //if (tfod != null)
+        //{
+        //    tfod.activate();
+        //}
 
         while (opModeIsActive() &&
                 (runtime.seconds() < timeoutS))
@@ -368,7 +368,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         }
     }
 
-    public void myLanderLift (double direction,
+    public void myLanderLift (Direction direction,
                                double speed,
                                double Inches,
                                double timeoutS) {
@@ -382,11 +382,11 @@ public class CallistoAutonomousBase extends LinearOpMode
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            if (direction == 0)
+            if (direction == Direction.ROBOT_UP)
             {
-                //Go down
+                //Go Up
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int)(Inches * TICKS_PER_INCH);
-            } else if (direction == 1) {
+            } else if (direction == Direction.ROBOT_DOWN) {
                 //Go down
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (-1 * Inches * TICKS_PER_INCH);
             }
@@ -443,7 +443,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         // Ensure that the op mode is still active
         if (opModeIsActive())
         {
-            myLanderLift(0, 1, 7.25, 10.0);
+            myLanderLift(Direction.ROBOT_DOWN, 1, 7.25, 10.0);
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
