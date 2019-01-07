@@ -11,40 +11,39 @@ import com.qualcomm.robotcore.util.Range;
 
 public class CallistoHW
 {
-
-    private HardwareMap hwMap = null;
-
     public DcMotor leftMotor = null;
     public DcMotor rightMotor = null;
     public DcMotor backrightMotor = null;
     public DcMotor backleftMotor = null;
-    public DcMotor MLift1 = null;
-    public DcMotor MLift2 = null;
-    public DcMotor MOnArm = null;
-    public CRServo spinnerServo = null;
-    public Servo trayServo = null;
 
-    public BNO055IMU imu = null;
-
+    public DcMotor MCollectionSlide = null;
+    public DcMotor MCollectionLift = null;
+    public DcMotor MDropLift = null;
     public DcMotor MLanderLift = null;
 
-    private ElapsedTime period = new ElapsedTime();
+    public CRServo spinnerServo = null;
+    public Servo trayServo = null;
+    public Servo markerServo = null;
+
+    public BNO055IMU imu = null;
 
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap)
     {
-        hwMap = ahwMap;
-
         leftMotor = ahwMap.get(DcMotor.class, "MFrontLeft");
         rightMotor = ahwMap.get(DcMotor.class, "MFrontRight");
         backleftMotor = ahwMap.get(DcMotor.class, "MBackLeft");
         backrightMotor = ahwMap.get(DcMotor.class, "MBackRight");
-        //MLift1 = ahwMap.get(DcMotor.class, "MLift1");
-        //MLift2 = ahwMap.get(DcMotor.class, "MLift2");
-        //MOnArm = ahwMap.get(DcMotor.class, "MOnArm");
+
+        MCollectionSlide = ahwMap.get(DcMotor.class, "MCollectionSlide");
+        MCollectionLift = ahwMap.get(DcMotor.class, "MCollectionLift");
+        MDropLift = ahwMap.get(DcMotor.class, "MDropLift");
+        MLanderLift = ahwMap.get(DcMotor.class, "MLanderLift");
+
         spinnerServo = ahwMap.get(CRServo.class, "spinnerServo");
         trayServo = ahwMap.get(Servo.class, "trayServo");
-        MLanderLift = ahwMap.get(DcMotor.class, "MLanderLift");
+        markerServo = ahwMap.get(Servo.class, "markerServo");
+
         imu = ahwMap.get(BNO055IMU.class, "imu");
 
         //initialize the IMU
@@ -59,7 +58,6 @@ public class CallistoHW
         //Invert direction for left motors
         leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backleftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        //MLift2.setDirection(DcMotorSimple.Direction.REVERSE);
 
         // Set all motors to zero power
         stopAllMotors();
@@ -77,11 +75,13 @@ public class CallistoHW
         rightMotor.setPower(0);
         backleftMotor.setPower(0);
         backrightMotor.setPower(0);
+
+        MCollectionSlide.setPower(0);
+        MCollectionLift.setPower(0);
+        MDropLift.setPower(0);
         MLanderLift.setPower(0);
+
         spinnerServo.setPower(0);
-        //MOnArm.setPower(0);
-        //MLift1.setPower(0);
-        //MLift2.setPower(0);
     }
 
     public void moveForward(double power)
@@ -156,53 +156,6 @@ public class CallistoHW
         backrightMotor.setPower(-1 * power);
     }
 
-    public void movearmup(double power)
-    {
-        //MLift1.setPower(0.7 * power);
-        //MLift2.setPower(0.7 * power);
-    }
-
-    public void movearmdown(double power)
-    {
-        //MLift1.setPower(-0.7 * power);
-        //MLift2.setPower(-0.7 * power);
-    }
-
-    public void pullarmout(double power)
-    {
-        //MOnArm.setPower(power);
-    }
-
-    public void pullarmin(double power)
-    {
-        //MOnArm.setPower(-1 * power);
-    }
-
-    public void turnspinnerservoforward(double power)
-    {
-        spinnerServo.setPower(power);
-    }
-
-    public void turnspinnerservobacwards(double power)
-    {
-        spinnerServo.setPower(-1 * power);
-    }
-
-    public void turnboxtocollect()
-    {
-        trayServo.setPosition(0.7);
-    }
-
-    public void turnboxtogotolander()
-    {
-        trayServo.setPosition(0);
-    }
-
-    public void turnboxtodrop()
-    {
-        trayServo.setPosition(0.3);
-    }
-
     public void forwardSlow()
     {
         leftMotor.setPower(Range.clip(leftMotor.getPower() + 0.01, 0.3, 1.0));
@@ -220,6 +173,36 @@ public class CallistoHW
         backrightMotor.setPower(Range.clip(backrightMotor.getPower() - 0.01, -0.3, -1.0));
     }
 
+
+    public void collectionSlideOut(double power)
+    {
+        MCollectionSlide.setPower(-1*power);
+    }
+
+    public void collectionSlideIn(double power)
+    {
+        MCollectionSlide.setPower(power);
+    }
+
+    public void collectionLiftUp(double power)
+    {
+        MCollectionLift.setPower(-1*power);
+    }
+
+    public void collectionLiftDown(double power)
+    {
+        MCollectionLift.setPower(power);
+    }
+
+    public void collectionDropLiftUp(double power)
+    {
+        MDropLift.setPower(-1*power);
+    }
+
+    public void collectionDropLiftDown(double power)
+    {
+        MDropLift.setPower(power);
+    }
     public void landerliftUp(double power)
     {
 
@@ -229,6 +212,35 @@ public class CallistoHW
     public void landerliftDown(double power)
     {
         MLanderLift.setPower(-1*power);
+    }
+
+    public void turnspinnerservoforward(double power)
+    {
+        spinnerServo.setPower(power);
+    }
+
+    public void turnspinnerservobacwards(double power)
+    {
+        spinnerServo.setPower(-1 * power);
+    }
+
+    public void turnTraytocollect()
+    {
+        trayServo.setPosition(0);
+    }
+
+    public void turnTraytodrop()
+    {
+        trayServo.setPosition(0.7);
+    }
+
+    public void turnMarkerServotoInitPos()
+    {
+        markerServo.setPosition(0);
+    }
+    public void turnMarkerServotoDrop()
+    {
+        markerServo.setPosition(0.7);
     }
 
 }

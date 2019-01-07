@@ -41,74 +41,98 @@ public class CallistoManual extends LinearOpMode
             if (gamepad1.left_stick_y < 0)
             {
                 robotCallisto.moveForward(motor_power);
-            } else if (gamepad1.left_stick_y > 0)
+            }
+            else if (gamepad1.left_stick_y > 0)
             {
                 robotCallisto.moveBackwards(motor_power);
-            } else if (gamepad1.left_stick_x < 0)
+            }
+            else if (gamepad1.left_stick_x < 0)
             {
                 robotCallisto.turnLeft(motor_power);
-            } else if (gamepad1.left_stick_x > 0)
+            }
+            else if (gamepad1.left_stick_x > 0)
             {
                 robotCallisto.turnRight(motor_power);
-            } else if (gamepad1.right_stick_x > 0)
+            }
+            else if (gamepad1.right_stick_x > 0)
             {
                 robotCallisto.strafeRight(motor_power);
-            } else if (gamepad1.right_stick_x < 0)
+            }
+            else if (gamepad1.right_stick_x < 0)
             {
                 robotCallisto.strafeleft(motor_power);
-            } else if (gamepad1.right_bumper)
+            }
+            else if (gamepad1.right_bumper)
             {
                 robotCallisto.diagonalforwardRight(motor_power);
-            } else if (gamepad1.left_bumper)
+            }
+            else if (gamepad1.left_bumper)
             {
                 robotCallisto.diagonalforwardLeft(motor_power);
-            } else if (gamepad1.left_trigger > 0.7)
+            }
+            else if (gamepad1.left_trigger > 0.7)
             {
                 robotCallisto.diagonalbackwardsLeft(motor_power);
-            } else if (gamepad1.right_trigger > 0.7)
+            }
+            else if (gamepad1.right_trigger > 0.7)
             {
                 robotCallisto.diagonalbackwardsRight(motor_power);
-            } else if (gamepad1.y)
+            }
+            else if (gamepad1.y)
             {
                 robotCallisto.forwardSlow();
-            } else if (gamepad1.a)
+            }
+            else if (gamepad1.a)
             {
                 robotCallisto.backwardSlow();
-            } else if (gamepad1.x)
+            }
+            else if (gamepad1.x)
             {
                 robotCallisto.landerliftUp(1);
-            } else if (gamepad1.b)
+            }
+            else if (gamepad1.b)
             {
                 robotCallisto.landerliftDown(1);
-            } else if (gamepad2.dpad_up)
+            }
+            else if (gamepad2.dpad_up)
             {
-                robotCallisto.pullarmout(motor_power);
-            } else if (gamepad2.dpad_down)
+                robotCallisto.collectionSlideIn(0.7);
+            }
+            else if (gamepad2.dpad_down)
             {
-                robotCallisto.pullarmin(motor_power);
-            } else if (gamepad2.dpad_left)
+                robotCallisto.collectionSlideOut(0.7);
+            }
+            else if (gamepad2.dpad_left)
             {
-                robotCallisto.movearmup(motor_power);
-            } else if (gamepad2.dpad_right)
+                robotCallisto.collectionLiftDown(0.7);
+            }
+            else if (gamepad2.dpad_right)
             {
-                robotCallisto.movearmdown(motor_power);
-            } else if (gamepad2.left_bumper)
-            {
-                robotCallisto.turnspinnerservoforward(motor_power);
-            } else if (gamepad2.right_bumper)
-            {
-                robotCallisto.turnspinnerservobacwards(motor_power);
-            } else if (gamepad2.b)
-            {
-                robotCallisto.turnboxtocollect();
+                robotCallisto.collectionLiftUp(0.7);
             }
             else if (gamepad2.y)
             {
-                robotCallisto.turnboxtogotolander();
+                robotCallisto.collectionDropLiftUp(0.8);
+            }
+            else if (gamepad2.a)
+            {
+                robotCallisto.collectionDropLiftDown(0.8);
+            }
+            else if (gamepad2.left_bumper)
+            {
+                robotCallisto.turnspinnerservoforward(motor_power);
+            }
+            else if (gamepad2.right_bumper)
+            {
+                robotCallisto.turnspinnerservobacwards(motor_power);
             }
             else if (gamepad2.x)
             {
-                robotCallisto.turnboxtodrop();
+                robotCallisto.turnTraytodrop();
+            }
+            else if (gamepad2.b)
+            {
+                robotCallisto.turnTraytocollect();
             }
             else
             {

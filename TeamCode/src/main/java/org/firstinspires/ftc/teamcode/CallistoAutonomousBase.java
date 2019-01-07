@@ -70,10 +70,11 @@ public class CallistoAutonomousBase extends LinearOpMode
         {
             telemetry.addData("Sorry!", "This device is not compatible with TFOD");
         }
-        if (tfod != null)
-        {
-            tfod.activate();
-        }
+
+        //if (tfod != null)
+        //{
+        //    tfod.activate();
+       // }
     }
 
     private void initVuforia()
@@ -187,6 +188,11 @@ public class CallistoAutonomousBase extends LinearOpMode
     {
         int positionGold = 2;
         runtime.reset();
+
+        if (tfod != null)
+        {
+            tfod.activate();
+        }
 
         while (opModeIsActive() &&
                 (runtime.seconds() < timeoutS))
