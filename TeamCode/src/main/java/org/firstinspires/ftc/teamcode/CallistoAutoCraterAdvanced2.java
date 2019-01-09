@@ -65,6 +65,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
                 myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED + 0.2,88.5,10.0); //PERFECT
                 rotate(125,TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,31,10.0);
+                robot.markerServo.setPosition(-0.9);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,60,10.0);
                 rotate(10,TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,12,10.0);
@@ -75,6 +76,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 35.5, 10.0);
                 rotate(127,TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,39,10.0);
+                robot.markerServo.setPosition(-0.9);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,60,10.0);
                 rotate(10,TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,10.5,10.0); // PERFECT
@@ -86,6 +88,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 62, 10.0);
                 rotate(125,TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,31,10.0);
+                robot.markerServo.setPosition(-0.9);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,59,10.0);
                 rotate(10,TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,11,10.0);//PERFECT

@@ -120,17 +120,17 @@ public class CallistoManual extends LinearOpMode
             }
             else if (gamepad2.left_bumper)
             {
-                robotCallisto.turnspinnerservoforward(motor_power);
+                robotCallisto.turnspinnerservobacwards(motor_power);
             }
             else if (gamepad2.right_bumper)
             {
-                robotCallisto.turnspinnerservobacwards(motor_power);
+                robotCallisto.turnspinnerservoforward(motor_power);
             }
-            else if (gamepad2.x)
+            else if (gamepad2.b)
             {
                 robotCallisto.turnTraytodrop();
             }
-            else if (gamepad2.b)
+            else if (gamepad2.x)
             {
                 robotCallisto.turnTraytocollect();
             }
