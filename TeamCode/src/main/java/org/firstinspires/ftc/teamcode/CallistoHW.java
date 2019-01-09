@@ -58,7 +58,7 @@ public class CallistoHW
         //Invert direction for left motors
         leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backleftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        MLanderLift.setDirection(DcMotorSimple.Direction.FORWARD);
         // Set all motors to zero power
         stopAllMotors();
 
