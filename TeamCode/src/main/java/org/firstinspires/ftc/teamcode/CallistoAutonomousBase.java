@@ -73,7 +73,7 @@ public class CallistoAutonomousBase extends LinearOpMode
 
         if (tfod != null)
         {
-            tfod.activate();
+           tfod.activate();
        }
     }
 
@@ -101,11 +101,14 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.backrightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
     }
 
@@ -189,10 +192,10 @@ public class CallistoAutonomousBase extends LinearOpMode
         int positionGold = 2;
         runtime.reset();
 
-        //if (tfod != null)
-        //{
-        //    tfod.activate();
-        //}
+        if (tfod != null)
+        {
+            //tfod.activate();
+        }
 
         while (opModeIsActive() &&
                 (runtime.seconds() < timeoutS))

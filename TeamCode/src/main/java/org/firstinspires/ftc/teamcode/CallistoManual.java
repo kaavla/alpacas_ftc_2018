@@ -38,27 +38,27 @@ public class CallistoManual extends LinearOpMode
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
 
-            if (gamepad1.left_stick_y < 0)
+            if (gamepad1.dpad_up)
             {
                 robotCallisto.moveForward(motor_power);
             }
-            else if (gamepad1.left_stick_y > 0)
+            else if (gamepad1.dpad_down)
             {
                 robotCallisto.moveBackwards(motor_power);
             }
-            else if (gamepad1.left_stick_x < 0)
+            else if (gamepad1.dpad_left)
             {
                 robotCallisto.turnLeft(motor_power);
             }
-            else if (gamepad1.left_stick_x > 0)
+            else if (gamepad1.dpad_right)
             {
                 robotCallisto.turnRight(motor_power);
             }
-            else if (gamepad1.right_stick_x > 0)
+            else if (gamepad1.b)
             {
                 robotCallisto.strafeRight(motor_power);
             }
-            else if (gamepad1.right_stick_x < 0)
+            else if (gamepad1.x)
             {
                 robotCallisto.strafeleft(motor_power);
             }
@@ -86,11 +86,11 @@ public class CallistoManual extends LinearOpMode
             {
                 robotCallisto.backwardSlow();
             }
-            else if (gamepad1.x)
+            else if (gamepad1.left_stick_button)
             {
                 robotCallisto.landerliftUp(1);
             }
-            else if (gamepad1.b)
+            else if (gamepad1.right_stick_button)
             {
                 robotCallisto.landerliftDown(1);
             }
@@ -112,11 +112,11 @@ public class CallistoManual extends LinearOpMode
             }
             else if (gamepad2.y)
             {
-                robotCallisto.collectionDropLiftUp(0.8);
+                robotCallisto.collectionDropLiftUp(0.9);
             }
             else if (gamepad2.a)
             {
-                robotCallisto.collectionDropLiftDown(0.8);
+                robotCallisto.collectionDropLiftDown(0.9);
             }
             else if (gamepad2.left_bumper)
             {

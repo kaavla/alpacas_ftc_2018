@@ -231,7 +231,7 @@ public class CallistoHW
 
     public void turnTraytodrop()
     {
-        trayServo.setPosition(0.7);
+        trayServo.setPosition(0.6);
     }
 
     public void turnMarkerServotoInitPos()
