@@ -98,17 +98,17 @@ public class CallistoAutonomousBase extends LinearOpMode
 
     public void initMotorEncoders()
     {
-        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.backrightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backrightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
     }
@@ -386,12 +386,10 @@ public class CallistoAutonomousBase extends LinearOpMode
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            if (direction == Direction.ROBOT_UP)
+            if (direction == Direction.ROBOT_DOWN)
             {
-                //Go Up
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int)(Inches * TICKS_PER_INCH);
-            } else if (direction == Direction.ROBOT_DOWN) {
-                //Go down
+            } else if (direction == Direction.ROBOT_UP) {
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (-1 * Inches * TICKS_PER_INCH);
             }
             else

@@ -59,6 +59,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0);
                 rotate(-90,TURN_SPEED);
                 myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,16.5,10.0);
+                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,3,10.0);
                 //myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED, 15, 10.0);//PERFECT
                 //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,18.5,10.0);
                 //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
@@ -69,6 +70,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
                 rotate(90,TURN_SPEED);
                 myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,16.5,10.0);
+                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,3,10.0);
                 //myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,21,10.0);
                 //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,15,10.0);//changed
                 //rotate(-161, TURN_SPEED);
@@ -79,7 +81,9 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
                 rotate(-180, TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,18.5, 20.0); //PERFECT
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,18.5, 20.0);
+                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,3,10.0);
+                //PERFECT
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
             }
         }
