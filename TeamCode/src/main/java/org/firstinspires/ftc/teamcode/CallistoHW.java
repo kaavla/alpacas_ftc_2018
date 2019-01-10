@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.util.RobotLog;
 
 public class CallistoHW
 {
@@ -30,6 +31,8 @@ public class CallistoHW
     /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap)
     {
+        RobotLog.ii("CAL", "Enter - init");
+
         leftMotor = ahwMap.get(DcMotor.class, "MFrontLeft");
         rightMotor = ahwMap.get(DcMotor.class, "MFrontRight");
         backleftMotor = ahwMap.get(DcMotor.class, "MBackLeft");
@@ -67,6 +70,8 @@ public class CallistoHW
         rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backrightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backleftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        RobotLog.ii("CAL", "Exit - init");
+
     }
 
     public void stopAllMotors()
@@ -204,7 +209,7 @@ public class CallistoHW
         MDropLift.setPower(power);
     }
     public void landerliftUp(double power)
-    {
+     {
 
         MLanderLift.setPower(power);
     }

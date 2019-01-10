@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.util.RobotLog;
 
 @TeleOp(name = "Callisto Manual", group = "Linear Opmode")
 //@Disabled
@@ -88,9 +89,6 @@ public class CallistoManual extends LinearOpMode
     {
         //This is where we set our motor powers
         double motor_power = 0.7;
-
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
 
         robotCallisto.init(hardwareMap);
 
@@ -210,8 +208,6 @@ public class CallistoManual extends LinearOpMode
             {
                 robotCallisto.turnMarkerServotoDrop();
             }
-
-
             else
             {
                 robotCallisto.stopAllMotors();
