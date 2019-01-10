@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -16,6 +17,8 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
     @Override
     public void runOpMode() {
         int positionGold = 2;
+        RobotLog.ii("CAL", "Enter - runOpMode - CallistoAutoCraterSimple");
+
         /*
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
@@ -30,16 +33,15 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
         waitForStart();
 
         positionGold = myTFOD(2);
-        //myLanderLift(0, 1, 7, 9.0);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
+        myLanderLift(Direction.ROBOT_UP, 1, 5, 5.0);
 
-        sleep(1000);     // pause for servos to move
+        //sleep(50);     // pause for servos to move
 
-        telemetry.addData("Path", "Complete");
+        telemetry.addData("Path", "Run Complete");
         telemetry.update();
-
-
+        RobotLog.ii("CAL", "Exit - runOpMode - CallistoAutoCraterSimple");
     }
 
     private void myDetectionRun(int position,
@@ -47,6 +49,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
                                 double timeoutS) {
 
 
+        RobotLog.ii("CAL", "Enter - myDetectionRun");
         //initialized the motor encoders
         initMotorEncoders();
 
@@ -59,7 +62,6 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0); //PERFECT
                 myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,16,10.0);
                 myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,16.5,10.0);
-                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,2, 5.0);
              } else if (position == 3)
             //left most side when standing near the lander lift
             {
@@ -69,17 +71,16 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,16,10.0);
                 rotate(60,TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,10,10.0);
-                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,2, 5.0);
-
             } else // Position = 2 also default position
             //center
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);//PERFECT
                 rotate(-180, TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,12, 20.0);
-                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,2,5.0);
             }
         }
+        RobotLog.ii("CAL", "Exit - myDetectionRun");
+
     }
 }
 
