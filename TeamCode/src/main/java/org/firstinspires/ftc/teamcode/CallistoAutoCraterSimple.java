@@ -57,22 +57,23 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
             //right most side when standing near the lander lift
                 {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0);
-                rotate(-90,TURN_SPEED);
-                myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,16.5,10.0);
+                //rotate(-90,TURN_SPEED);
+                //myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,16.5,10.0);
                 //myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED, 15, 10.0);//PERFECT
                 //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,18.5,10.0);
                 //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
-                //rotate(-180, TURN_SPEED);
+                rotate(-180, TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,18,10.0);
             } else if (position == 3)
             //left most side when standing near the lander lift
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
-                rotate(90,TURN_SPEED);
-                myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,16.5,10.0);
+                //rotate(90,TURN_SPEED);
+                //myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,18.5,10.0);
                 //myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,21,10.0);
                 //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,15,10.0);//changed
-                //rotate(-161, TURN_SPEED);
-                //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,21, 20.0);
+                rotate(-161, TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,18, 20.0);
 
             } else // Position = 2 also default position
             //center
