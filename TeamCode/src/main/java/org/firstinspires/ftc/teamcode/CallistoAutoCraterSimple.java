@@ -56,35 +56,28 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
             if (position == 1)
             //right most side when standing near the lander lift
                 {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0);
-                rotate(-90,TURN_SPEED);
-                myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,16.5,10.0);
-                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,3,10.0);
-                //myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED, 15, 10.0);//PERFECT
-                //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,18.5,10.0);
-                //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
-                //rotate(-180, TURN_SPEED);
-            } else if (position == 3)
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0); //PERFECT
+                myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,16,10.0);
+                myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,16.5,10.0);
+                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,2, 5.0);
+             } else if (position == 3)
             //left most side when standing near the lander lift
             {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
-                rotate(90,TURN_SPEED);
-                myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,16.5,10.0);
-                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,3,10.0);
-                //myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED,21,10.0);
-                //myEncoderDrive(direction.FORWARD,DRIVE_SPEED,15,10.0);//changed
-                //rotate(-161, TURN_SPEED);
-                //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,21, 20.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 11, 20.0);//PERFECT
+                myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,53,20.0);
+                rotate(160, TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,16,10.0);
+                rotate(60,TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,10,10.0);
+                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,2, 5.0);
 
             } else // Position = 2 also default position
             //center
             {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);//PERFECT
                 rotate(-180, TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,18.5, 20.0);
-                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,3,10.0);
-                //PERFECT
-                //myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,12, 20.0);
+                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,2,5.0);
             }
         }
     }
