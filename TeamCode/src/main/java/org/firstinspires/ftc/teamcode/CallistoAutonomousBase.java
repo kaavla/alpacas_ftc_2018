@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
@@ -60,6 +61,7 @@ public class CallistoAutonomousBase extends LinearOpMode
 
     public void initHW()
     {
+        RobotLog.ii("CAL", "Enter -  initHW");
         robot.init(hardwareMap);
         initMotorEncoders();
         initVuforia();
@@ -76,28 +78,34 @@ public class CallistoAutonomousBase extends LinearOpMode
         {
            tfod.activate();
        }
+       RobotLog.ii("CAL", "Exit -  initHW");
     }
 
     private void initVuforia()
     {
+        RobotLog.ii("CAL", "Enter -  initVuforia");
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters();
         parameters.vuforiaLicenseKey = VUFORIA_KEY;
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
+        RobotLog.ii("CAL", "Exit -  initVuforia");
 
     }
 
     private void initTfod()
     {
+        RobotLog.ii("CAL", "Enter -  initTfod");
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         TFObjectDetector.Parameters tfodParameters = new TFObjectDetector.Parameters(tfodMonitorViewId);
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
+        RobotLog.ii("CAL", "Exit -  initTfod");
     }
 
     public void initMotorEncoders()
     {
+        RobotLog.ii("CAL", "Enter -  initMotorEncoders");
         robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -109,13 +117,13 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.backrightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-
+        RobotLog.ii("CAL", "Exit -  initMotorEncoders");
     }
 
     private void resetAngle()
     {
         lastAngles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        RobotLog.ii("CAL", "resetAngle - lastAngles = %2.2f", lastAngles.firstAngle);
         globalAngle = 0;
     }
 
@@ -144,6 +152,8 @@ public class CallistoAutonomousBase extends LinearOpMode
 
     public void rotate(int degrees, double power)
     {
+        RobotLog.ii("CAL", "Enter - rotate - degrees=%d, power=%d",
+                degrees, power);
 
         // restart imu movement tracking.
         resetAngle();
@@ -185,11 +195,13 @@ public class CallistoAutonomousBase extends LinearOpMode
 
         // reset angle tracking on new heading.
         resetAngle();
+        RobotLog.ii("CAL", "Exit - rotate");
     }
 
 
     public int myTFOD(double timeoutS)
     {
+        RobotLog.ii("CAL", "Enter - myTFOD - timeout=%f", timeoutS);
         int positionGold = 2;
         runtime.reset();
 
@@ -207,6 +219,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                 if (updatedRecognitions != null)
                 {
                     telemetry.addData("# Object Detected", updatedRecognitions.size());
+                    RobotLog.ii("CAL", "myTFOD - Objects Detected =%d", updatedRecognitions.size());
                     if (updatedRecognitions.size() == 3)
                     {
                         int goldMineralX = -1;
@@ -254,6 +267,8 @@ public class CallistoAutonomousBase extends LinearOpMode
         {
             tfod.shutdown();
         }
+        RobotLog.ii("CAL", "Exit - myTFOD - positionGold=%d", positionGold);
+
         return positionGold;
     }
 
@@ -263,10 +278,12 @@ public class CallistoAutonomousBase extends LinearOpMode
                                double Inches,
                                double timeoutS)
     {
-        int newLeftTarget;
-        int newRightTarget;
-        int newLeftBackTarget;
-        int newRightBackTarget;
+        int newLeftTarget = 0;
+        int newRightTarget = 0;
+        int newLeftBackTarget = 0;
+        int newRightBackTarget = 0;
+        RobotLog.ii("CAL", "Enter - myEncoderDrive - Direction=%d, speed=%f, Inches=%f, timeout=%f",
+                direction, speed, Inches, timeoutS);
 
         //Reset the encoder
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -370,6 +387,8 @@ public class CallistoAutonomousBase extends LinearOpMode
 
             sleep(50);   // optional pause after each move
         }
+        RobotLog.ii("CAL", "Exit - myEncoderDrive ");
+
     }
 
     public void myLanderLift (Direction direction,
@@ -377,6 +396,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                                double Inches,
                                double timeoutS) {
         int newLiftTarget;
+        RobotLog.ii("CAL", "Enter - myLanderLift");
 
 
         //Reset the encoder
@@ -416,21 +436,25 @@ public class CallistoAutonomousBase extends LinearOpMode
             //while (opModeIsActive() &&
             //        (runtime.seconds() < timeoutS) &&
             //       (robot.MLanderLift.isBusy() )) {
+            RobotLog.ii("CAL", "Enter - myLanderLift - waiting to get to pos");
             while (opModeIsActive() &&
-                    (runtime.seconds() < timeoutS)) {
+                    (runtime.seconds() < timeoutS) &&
+                           (robot.MLanderLift.isBusy() )) {
 
                 // Display it for the driver.
-                telemetry.addData("Path1",  "Run time to %7f", runtime.seconds());
+                //telemetry.addData("Path1",  "Run time to %7f", runtime.seconds());
                 //telemetry.addData("Path2",  "Running at %7d :%7d",
                 //        robot.MLanderLift.getCurrentPosition());
-                telemetry.update();
+                //telemetry.update();
             }
+            RobotLog.ii("CAL", "Enter - myLanderLift - reached pos");
 
             // Stop all motion;
             robot.MLanderLift.setPower(0);
 
             // Turn off RUN_TO_POSITION
             robot.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            RobotLog.ii("CAL", "Exit - myLanderLift");
 
             //sleep(50);   // optional pause after each move
         }
@@ -441,6 +465,9 @@ public class CallistoAutonomousBase extends LinearOpMode
                                 double speed,
                                 double timeoutS)
     {
+        RobotLog.ii("CAL", "Enter - myDetectionTest");
+        telemetry.addData("Path1",  "Position Detected %d", position);
+        telemetry.update();
 
         // Ensure that the op mode is still active
         if (opModeIsActive())
@@ -468,10 +495,8 @@ public class CallistoAutonomousBase extends LinearOpMode
                 rotate(82 , TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
             }
-
-
-
-
         }
+        RobotLog.ii("CAL", "Exit - myDetectionTest");
+
     }
 }
