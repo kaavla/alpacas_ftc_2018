@@ -58,7 +58,7 @@ public class CallistoHW
         //Invert direction for left motors
         leftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         backleftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-
+        MLanderLift.setDirection(DcMotorSimple.Direction.FORWARD);
         // Set all motors to zero power
         stopAllMotors();
 
@@ -231,7 +231,7 @@ public class CallistoHW
 
     public void turnTraytodrop()
     {
-        trayServo.setPosition(0.7);
+        trayServo.setPosition(0.6);
     }
 
     public void turnMarkerServotoInitPos()
@@ -242,5 +242,6 @@ public class CallistoHW
     {
         markerServo.setPosition(0.7);
     }
+
 
 }

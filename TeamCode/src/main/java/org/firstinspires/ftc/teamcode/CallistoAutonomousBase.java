@@ -47,7 +47,8 @@ public class CallistoAutonomousBase extends LinearOpMode
     final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     final String LABEL_GOLD_MINERAL = "Gold Mineral";
     final String LABEL_SILVER_MINERAL = "Silver Mineral";
-    final String VUFORIA_KEY = "AUWa2hP/////AAABmYAEN4JY30WlndAsvgcYjZAcwt/KX4c9VUt+Br3zZxPhIbJ+ovlQrV3YlETOwJ4Q5NajUuwkdpnX2292snWM8iiXzQ2Nm37xl78r82PlDZPAKP8XV+9sBg1KMHO+0zDzTtWNa/fmNPeEhmdff/YWUzcqTmGLnccOhj57waivZa4Y5xDfH4YKssYJUNQKumOd8v5m90IEKYgWghs7BhxpWfQbjzC+3QUKPc7q34V+9W4xQ+2S+hI0inYLrK4rSdiCGU76d8hwlBWuDC8PWrkqwIi6EptTL/nP1rLoWy/Usv6ZUqRRHwkgLNYsrWusN0G5d71F6tdvRDbGdgQKQ2evHWZPPtlVW6u0S5N5S2sXu7R+";
+    //final String VUFORIA_KEY = "AUWa2hP/////AAABmYAEN4JY30WlndAsvgcYjZAcwt/KX4c9VUt+Br3zZxPhIbJ+ovlQrV3YlETOwJ4Q5NajUuwkdpnX2292snWM8iiXzQ2Nm37xl78r82PlDZPAKP8XV+9sBg1KMHO+0zDzTtWNa/fmNPeEhmdff/YWUzcqTmGLnccOhj57waivZa4Y5xDfH4YKssYJUNQKumOd8v5m90IEKYgWghs7BhxpWfQbjzC+3QUKPc7q34V+9W4xQ+2S+hI0inYLrK4rSdiCGU76d8hwlBWuDC8PWrkqwIi6EptTL/nP1rLoWy/Usv6ZUqRRHwkgLNYsrWusN0G5d71F6tdvRDbGdgQKQ2evHWZPPtlVW6u0S5N5S2sXu7R+";
+    final String VUFORIA_KEY = "ARgorO//////AAABmTNryRWHs0iduuKYeo/RTC82lqjhxM1ZpUq78wyOpzAx3mn9q5fKWvlN0WQf9YptFPy17FAlMDA8SQ0qMdUmlmFP7tJ/kTQwXgoPrJFp78KmMTFs+x8vHXPYGkvSM9TY4/2pStDcTHqM3jLl0nlaF+4zulnDcwsz/EKhzL87hkBnatk1GGYTXlyKUB7XrHLDkMyNgtghrk7qdSXnYHhvbQzzZ87d5PTgJygjI7AHUFL4alR8nD9D2tNmP9tkVniV0OQ1ZcVoBQM5fzKPkW7fsZgK/S852yHXx7UWqrD2hiPVNhHKamBc5a4b94uCBCScLaZkiQJQr8a3YxW0otbOpBJzhwNa8AP7exZPXWkLdzw2";
     public TFObjectDetector tfod = null;
     public VuforiaLocalizer vuforia = null;
 
@@ -73,7 +74,7 @@ public class CallistoAutonomousBase extends LinearOpMode
 
         if (tfod != null)
         {
-            tfod.activate();
+           tfod.activate();
        }
     }
 
@@ -97,15 +98,18 @@ public class CallistoAutonomousBase extends LinearOpMode
 
     public void initMotorEncoders()
     {
-        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.backrightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backleftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.backrightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backrightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
     }
 
@@ -189,10 +193,10 @@ public class CallistoAutonomousBase extends LinearOpMode
         int positionGold = 2;
         runtime.reset();
 
-        //if (tfod != null)
-        //{
-        //    tfod.activate();
-        //}
+        if (tfod != null)
+        {
+            //tfod.activate();
+        }
 
         while (opModeIsActive() &&
                 (runtime.seconds() < timeoutS))
@@ -382,12 +386,10 @@ public class CallistoAutonomousBase extends LinearOpMode
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            if (direction == Direction.ROBOT_UP)
+            if (direction == Direction.ROBOT_DOWN)
             {
-                //Go Up
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int)(Inches * TICKS_PER_INCH);
-            } else if (direction == Direction.ROBOT_DOWN) {
-                //Go down
+            } else if (direction == Direction.ROBOT_UP) {
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (-1 * Inches * TICKS_PER_INCH);
             }
             else

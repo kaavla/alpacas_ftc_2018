@@ -80,7 +80,9 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
             {
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);
                 rotate(-180, TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,18.5, 20.0); //PERFECT
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,18.5, 20.0);
+                myLanderLift(Direction.ROBOT_UP,TURN_SPEED,3,10.0);
+                //PERFECT
                 //myEncoderDrive(1, robot.DRIVE_SPEED, 13, 10.0);
             }
         }
