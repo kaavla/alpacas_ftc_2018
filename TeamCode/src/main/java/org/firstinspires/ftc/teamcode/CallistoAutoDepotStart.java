@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
@@ -20,6 +21,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
     public void runOpMode()
     {
         int positionGold = 2;
+        RobotLog.ii("CAL", "Enter - runOpMode - CallistoAutoDepotStart");
         /*
          * Initialize the drive system variables.
          * The init() method of the hardware class does all the work here
@@ -27,8 +29,8 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         initHW();
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Status", "Resetting Encoders");    //
-        telemetry.update();
+        //telemetry.addData("Status", "Resetting Encoders");    //
+        //telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -38,11 +40,11 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
         myLanderLift(Direction.ROBOT_UP, 1, 5, 5.0);
 
-        sleep(50);     // pause for servos to move
+        //sleep(50);     // pause for servos to move
 
-        telemetry.addData("Path", "Complete");
+        telemetry.addData("Path", "Run Complete");
         telemetry.update();
-
+        RobotLog.ii("CAL", "Exit - runOpMode - CallistoAutoDepotStart");
 
     }
 
@@ -51,6 +53,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                                 double timeoutS)
     {
 
+        RobotLog.ii("CAL", "Enter - myDetectionRun");
 
         //initialized the motor encoders
         initMotorEncoders();
@@ -96,5 +99,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
             }
 
         }
+        RobotLog.ii("CAL", "Exit - myDetectionRun");
+
     }
 }
