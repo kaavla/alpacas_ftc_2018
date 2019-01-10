@@ -449,7 +449,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 18, 10.0);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
                 rotate(80, TURN_SPEED);
                 //myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
@@ -457,13 +457,14 @@ public class CallistoAutonomousBase extends LinearOpMode
             }
             else if (position == 3)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 18, 10.0);
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 15, 10.0);
                 rotate(70, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
             } else // Position = 2 and default position
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 18, 10.0);
+                //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 2, 10.0);
                 rotate(82 , TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
             }
