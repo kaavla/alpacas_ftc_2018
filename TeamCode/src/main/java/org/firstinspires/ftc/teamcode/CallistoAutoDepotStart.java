@@ -59,7 +59,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         initMotorEncoders();
 
         // Ensure that the op mode is still active
-        if (opModeIsActive())
+        if (opModeIsActive() && !isStopRequested() )
         {
 
             // Determine new target position, and pass to motor controller

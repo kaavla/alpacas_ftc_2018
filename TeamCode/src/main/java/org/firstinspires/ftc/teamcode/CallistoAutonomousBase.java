@@ -171,15 +171,15 @@ public class CallistoAutonomousBase extends LinearOpMode
         if (degrees < 0)
         {
             // On right turn we have to get off zero first.
-            while (opModeIsActive() && getAngle() == 0)
+            while (opModeIsActive() && !isStopRequested()  && getAngle() == 0)
             {
             }
 
-            while (opModeIsActive() && getAngle() > degrees)
+            while (opModeIsActive() && !isStopRequested()  && getAngle() > degrees)
             {
             }
         } else    // left turn.
-            while (opModeIsActive() && getAngle() < degrees)
+            while (opModeIsActive() && !isStopRequested()  && getAngle() < degrees)
             {
             }
 
@@ -210,7 +210,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             //tfod.activate();
         }
 
-        while (opModeIsActive() &&
+        while (opModeIsActive() && !isStopRequested()  &&
                 (runtime.seconds() < timeoutS))
         {
             if (tfod != null)
@@ -292,7 +292,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Ensure that the op mode is still active
-        if (opModeIsActive())
+        if (opModeIsActive() && !isStopRequested() )
         {
 
             // Determine new target position, and pass to motor controller
@@ -360,7 +360,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             // always end the motion as soon as possible.
             // However, if you require that BOTH motors have finished their moves before the robot continues
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
-            while (opModeIsActive() &&
+            while (opModeIsActive() && !isStopRequested()  &&
                     (runtime.seconds() < timeoutS) &&
                     (robot.leftMotor.isBusy()))
             {
@@ -403,7 +403,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Ensure that the op mode is still active
-        if (opModeIsActive()) {
+        if (opModeIsActive() && !isStopRequested() ) {
 
             // Determine new target position, and pass to motor controller
             if (direction == Direction.ROBOT_DOWN)
@@ -433,11 +433,11 @@ public class CallistoAutonomousBase extends LinearOpMode
             // always end the motion as soon as possible.
             // However, if you require that BOTH motors have finished their moves before the robot continues
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
-            //while (opModeIsActive() &&
+            //while (opModeIsActive() && !isStopRequested()  &&
             //        (runtime.seconds() < timeoutS) &&
             //       (robot.MLanderLift.isBusy() )) {
             RobotLog.ii("CAL", "Enter - myLanderLift - waiting to get to pos");
-            while (opModeIsActive() &&
+            while (opModeIsActive() && !isStopRequested()  &&
                     (runtime.seconds() < timeoutS) &&
                            (robot.MLanderLift.isBusy() )) {
 
@@ -470,7 +470,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         telemetry.update();
 
         // Ensure that the op mode is still active
-        if (opModeIsActive())
+        if (opModeIsActive() && !isStopRequested() )
         {
             myLanderLift(Direction.ROBOT_DOWN, 1, 7.25, 10.0);
             // Determine new target position, and pass to motor controller

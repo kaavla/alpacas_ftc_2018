@@ -53,7 +53,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
         //initialized the motor encoders
         initMotorEncoders();
 
-        if (opModeIsActive()) {
+        if (opModeIsActive() && !isStopRequested()) {
 
             // Determine new target position, and pass to motor controller
             if (position == 1)
