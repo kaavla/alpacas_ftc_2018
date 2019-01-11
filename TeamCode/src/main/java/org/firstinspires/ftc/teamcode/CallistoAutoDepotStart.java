@@ -65,41 +65,36 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 20, 10.0);
+                //cube on left
+                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 23, 10.0);
+                robot.markerServo.setPosition(0.9);
                 rotate(30, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 9, 10.0);
-                robot.markerServo.setPosition(0.9);
-                rotate(74, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, 0.95, 49, 10.0);
-                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 5, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 12, 10.0);
+                rotate(72, TURN_SPEED);
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 3, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 71, 10.0);
             }
              else if (position == 3)
             {
+                //cube on right
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 20, 10.0);
                 rotate(-30, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 10, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0);
                 robot.markerServo.setPosition(0.9);
-                myEncoderDrive(Direction.BACKWARD, 0.95, 49, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 5, 10.0);
+                myEncoderDrive(Direction.BACKWARD, 0.95, 51, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 3, 10.0);
                 myEncoderDrive(Direction.BACKWARD, 0.95, 12, 10.0);
             } else // Position = 2 also default position
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 26, 10.0);
-                rotate(-44, TURN_SPEED);
+                //cube in middle
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 4, 5.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 28, 10.0);
                 robot.markerServo.setPosition(0.9);
-                myEncoderDrive(Direction.BACKWARD, 0.95, 49, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 5, 10.0);
-                myEncoderDrive(Direction.BACKWARD, 0.95, 12, 10.0);
-                //myEncoderDrive(2, 0.9, 3, 10.0);
-                //myEncoderDrive(Direction.BACKWARD, 0.95, 33, 10.0);
-                //myEncoderDrive(1, DRIVE_SPEED, 20, 10.0);
-                //rotate(-14, TURN_SPEED);
-                //myEncoderDrive(1, DRIVE_SPEED, 13, 10.0);
+                rotate(-44, TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD, 0.95, 69, 10.0);
             }
 
         }
         RobotLog.ii("CAL", "Exit - myDetectionRun");
-
     }
 }

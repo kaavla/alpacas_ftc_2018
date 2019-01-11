@@ -39,7 +39,7 @@ public class CallistoAutonomousBase extends LinearOpMode
 
     //Need to Change
     static final double ROTATIONS_PER_INCH = 11.42;
-    static final double TICKS_PER_INCH = (ROTATIONS_PER_INCH * 1120);
+    static final double TICKS_PER_INCH = (ROTATIONS_PER_INCH * 1440);
     //Need to Change
 
     static final double DRIVE_SPEED = 0.7;
@@ -152,7 +152,7 @@ public class CallistoAutonomousBase extends LinearOpMode
 
     public void rotate(int degrees, double power)
     {
-        RobotLog.ii("CAL", "Enter - rotate - degrees=%d, power=%d",
+        RobotLog.ii("CAL", "Enter - rotate - degrees=%d, power=%f",
                 degrees, power);
 
         // restart imu movement tracking.
@@ -220,6 +220,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                 {
                     telemetry.addData("# Object Detected", updatedRecognitions.size());
                     RobotLog.ii("CAL", "myTFOD - Objects Detected =%d", updatedRecognitions.size());
+
                     if (updatedRecognitions.size() == 3)
                     {
                         int goldMineralX = -1;
@@ -282,8 +283,8 @@ public class CallistoAutonomousBase extends LinearOpMode
         int newRightTarget = 0;
         int newLeftBackTarget = 0;
         int newRightBackTarget = 0;
-        RobotLog.ii("CAL", "Enter - myEncoderDrive - Direction=%d, speed=%f, Inches=%f, timeout=%f",
-                direction, speed, Inches, timeoutS);
+        RobotLog.ii("CAL", "Enter - myEncoderDrive -  speed=%f, Inches=%f, timeout=%f",
+                speed, Inches, timeoutS);
 
         //Reset the encoder
         robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -472,7 +473,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         // Ensure that the op mode is still active
         if (opModeIsActive() && !isStopRequested() )
         {
-            myLanderLift(Direction.ROBOT_DOWN, 1, 7.25, 10.0);
+            myLanderLift(Direction.ROBOT_DOWN, 1, 6.5, 9.0);
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {

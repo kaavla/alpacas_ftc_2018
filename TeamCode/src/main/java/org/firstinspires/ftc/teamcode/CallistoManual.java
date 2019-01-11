@@ -90,6 +90,13 @@ public class CallistoManual extends LinearOpMode
         //This is where we set our motor powers
         double motor_power = 0.7;
 
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+        RobotLog.aa("CAL", "aaTest Message = %f", motor_power);
+        RobotLog.ii("CAL", "iiTest Message = %f", motor_power);
+        RobotLog.dd("CAL", "ddTest Message = %f", motor_power);
+        RobotLog.vv("CAL", "vvTest Message = %f", motor_power);
+        RobotLog.ee("CAL", "eeTest Message = %f", motor_power);
         robotCallisto.init(hardwareMap);
 
         waitForStart();
@@ -208,6 +215,8 @@ public class CallistoManual extends LinearOpMode
             {
                 robotCallisto.turnMarkerServotoDrop();
             }
+
+
             else
             {
                 robotCallisto.stopAllMotors();
