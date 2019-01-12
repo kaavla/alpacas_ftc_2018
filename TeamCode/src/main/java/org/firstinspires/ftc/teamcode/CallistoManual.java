@@ -92,14 +92,16 @@ public class CallistoManual extends LinearOpMode
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        RobotLog.aa("CAL", "aaTest Message = %f", motor_power);
-        RobotLog.ii("CAL", "iiTest Message = %f", motor_power);
-        RobotLog.dd("CAL", "ddTest Message = %f", motor_power);
-        RobotLog.vv("CAL", "vvTest Message = %f", motor_power);
-        RobotLog.ee("CAL", "eeTest Message = %f", motor_power);
         robotCallisto.init(hardwareMap);
 
-        waitForStart();
+        //waitForStart();
+        // Do not use waitForStart() if you have Motorola E4 phones.
+        //waitForStart();
+        while (!opModeIsActive() && !isStopRequested()) {
+            telemetry.addData("status", "waiting for start command...");
+            telemetry.update();
+        }
+
         runtime.reset();
 
         // run until the end of the match (driver presses STOP)

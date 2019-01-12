@@ -69,16 +69,20 @@ public class CallistoAutonomousBase extends LinearOpMode
         if (ClassFactory.getInstance().canCreateTFObjectDetector())
         {
             initTfod();
-        } else
+        }
+        else
         {
             telemetry.addData("Sorry!", "This device is not compatible with TFOD");
         }
 
         if (tfod != null)
         {
-           tfod.activate();
-       }
-       RobotLog.ii("CAL", "Exit -  initHW");
+            tfod.activate();
+        }
+        telemetry.addData("Path1", "Init HW Done");
+        telemetry.update();
+
+        RobotLog.ii("CAL", "Exit -  initHW");
     }
 
     private void initVuforia()
@@ -89,6 +93,9 @@ public class CallistoAutonomousBase extends LinearOpMode
         parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
         RobotLog.ii("CAL", "Exit -  initVuforia");
+        telemetry.addData("Path1", "Init Vuforia Done");
+        telemetry.update();
+
 
     }
 
@@ -101,6 +108,9 @@ public class CallistoAutonomousBase extends LinearOpMode
         tfod = ClassFactory.getInstance().createTFObjectDetector(tfodParameters, vuforia);
         tfod.loadModelFromAsset(TFOD_MODEL_ASSET, LABEL_GOLD_MINERAL, LABEL_SILVER_MINERAL);
         RobotLog.ii("CAL", "Exit -  initTfod");
+        telemetry.addData("Path1", "Init TFOD Done");
+        telemetry.update();
+
     }
 
     public void initMotorEncoders()
@@ -118,6 +128,10 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         RobotLog.ii("CAL", "Exit -  initMotorEncoders");
+
+        telemetry.addData("Path1", "Init MotorEncoders Done");
+        telemetry.update();
+
     }
 
     private void resetAngle()
@@ -161,25 +175,28 @@ public class CallistoAutonomousBase extends LinearOpMode
         if (degrees < 0)
         {   // turn right.
             robot.turnRight(power);
-        } else if (degrees > 0)
+        }
+        else if (degrees > 0)
         {   // turn left.
             robot.turnLeft(power);
-        } else return;
+        }
+        else return;
 
 
         // rotate until turn is completed.
         if (degrees < 0)
         {
             // On right turn we have to get off zero first.
-            while (opModeIsActive() && !isStopRequested()  && getAngle() == 0)
+            while (opModeIsActive() && !isStopRequested() && getAngle() == 0)
             {
             }
 
-            while (opModeIsActive() && !isStopRequested()  && getAngle() > degrees)
+            while (opModeIsActive() && !isStopRequested() && getAngle() > degrees)
             {
             }
-        } else    // left turn.
-            while (opModeIsActive() && !isStopRequested()  && getAngle() < degrees)
+        }
+        else    // left turn.
+            while (opModeIsActive() && !isStopRequested() && getAngle() < degrees)
             {
             }
 
@@ -210,7 +227,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             //tfod.activate();
         }
 
-        while (opModeIsActive() && !isStopRequested()  &&
+        while (opModeIsActive() && !isStopRequested() &&
                 (runtime.seconds() < timeoutS))
         {
             if (tfod != null)
@@ -218,9 +235,56 @@ public class CallistoAutonomousBase extends LinearOpMode
                 List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                 if (updatedRecognitions != null)
                 {
-                    telemetry.addData("# Object Detected", updatedRecognitions.size());
+                    telemetry.addData("Path1", "# Objects Detected %d",updatedRecognitions.size());
                     RobotLog.ii("CAL", "myTFOD - Objects Detected =%d", updatedRecognitions.size());
 
+                    /////////////////////////////////
+                    if (updatedRecognitions.size() == 2)
+                    {
+                        int goldMineralX = -1;
+                        int silverMineral1X = -1;
+                        int silverMineral2X = -1;
+                        for (Recognition recognition : updatedRecognitions)
+                        {
+                            if (recognition.getLabel().equals(LABEL_GOLD_MINERAL))
+                            {
+                                goldMineralX = (int) recognition.getLeft();
+                            }
+                            else if (silverMineral1X == -1)
+                            {
+                                silverMineral1X = (int) recognition.getLeft();
+                            }
+                            else
+                            {
+                                silverMineral2X = (int) recognition.getLeft();
+                            }
+                        }
+                        // Assuming we see only the center and left (as the camera sees) minerals through the camera
+                        // If Gold mineral is not found, that means it is the right (1) one
+                        if (goldMineralX == -1)
+                        {
+                            telemetry.addData("Gold Mineral Position", "Right");
+                            positionGold = 1;
+                            break;
+                        }
+                        else if (silverMineral2X == -1)
+                        {
+                            if (goldMineralX > silverMineral1X)
+                            {
+                                telemetry.addData("Gold Mineral Position", "Center");
+                                positionGold = 2;
+                                break;
+                            }
+                            else
+                            {
+                                telemetry.addData("Gold Mineral Position", "Left");
+                                positionGold = 3;
+                                break;
+                            }
+                        }
+                    }
+                    telemetry.update();
+                    ///////////////////////////////////
                     if (updatedRecognitions.size() == 3)
                     {
                         int goldMineralX = -1;
@@ -231,10 +295,12 @@ public class CallistoAutonomousBase extends LinearOpMode
                             if (recognition.getLabel().equals(LABEL_GOLD_MINERAL))
                             {
                                 goldMineralX = (int) recognition.getLeft();
-                            } else if (silverMineral1X == -1)
+                            }
+                            else if (silverMineral1X == -1)
                             {
                                 silverMineral1X = (int) recognition.getLeft();
-                            } else
+                            }
+                            else
                             {
                                 silverMineral2X = (int) recognition.getLeft();
                             }
@@ -246,12 +312,14 @@ public class CallistoAutonomousBase extends LinearOpMode
                                 telemetry.addData("Gold Mineral Position", "Left");
                                 positionGold = 3;
                                 break;
-                            } else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X)
+                            }
+                            else if (goldMineralX > silverMineral1X && goldMineralX > silverMineral2X)
                             {
                                 telemetry.addData("Gold Mineral Position", "Right");
                                 positionGold = 1;
                                 break;
-                            } else
+                            }
+                            else
                             {
                                 telemetry.addData("Gold Mineral Position", "Center");
                                 positionGold = 2;
@@ -274,10 +342,7 @@ public class CallistoAutonomousBase extends LinearOpMode
     }
 
 
-    public void myEncoderDrive(Direction direction,
-                               double speed,
-                               double Inches,
-                               double timeoutS)
+    public void myEncoderDrive(Direction direction, double speed, double Inches, double timeoutS)
     {
         int newLeftTarget = 0;
         int newRightTarget = 0;
@@ -293,7 +358,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.backleftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Ensure that the op mode is still active
-        if (opModeIsActive() && !isStopRequested() )
+        if (opModeIsActive() && !isStopRequested())
         {
 
             // Determine new target position, and pass to motor controller
@@ -304,14 +369,16 @@ public class CallistoAutonomousBase extends LinearOpMode
                 newRightTarget = robot.leftMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
                 newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
-            } else if (direction == Direction.BACKWARD)
+            }
+            else if (direction == Direction.BACKWARD)
             {
                 //Go backward
                 newLeftTarget = robot.rightMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newRightTarget = robot.leftMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
-            } else if (direction == Direction.STRAFE_RIGHT)
+            }
+            else if (direction == Direction.STRAFE_RIGHT)
             {
                 //Strafe Right
                 newLeftTarget = robot.rightMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
@@ -319,7 +386,8 @@ public class CallistoAutonomousBase extends LinearOpMode
                 newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
 
-            } else if (direction == Direction.STRAFE_LEFT)
+            }
+            else if (direction == Direction.STRAFE_LEFT)
             {
                 //Strafe Left
                 newLeftTarget = robot.rightMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
@@ -327,7 +395,8 @@ public class CallistoAutonomousBase extends LinearOpMode
                 newLeftBackTarget = robot.backrightMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int) (-1 * Inches * COUNTS_PER_INCH);
 
-            } else
+            }
+            else
             {
                 Inches = 0;
                 newLeftTarget = robot.rightMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
@@ -361,7 +430,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             // always end the motion as soon as possible.
             // However, if you require that BOTH motors have finished their moves before the robot continues
             // onto the next step, use (isBusy() || isBusy()) in the loop test.
-            while (opModeIsActive() && !isStopRequested()  &&
+            while (opModeIsActive() && !isStopRequested() &&
                     (runtime.seconds() < timeoutS) &&
                     (robot.leftMotor.isBusy()))
             {
@@ -392,10 +461,11 @@ public class CallistoAutonomousBase extends LinearOpMode
 
     }
 
-    public void myLanderLift (Direction direction,
-                               double speed,
-                               double Inches,
-                               double timeoutS) {
+    public void myLanderLift(Direction direction,
+                             double speed,
+                             double Inches,
+                             double timeoutS)
+    {
         int newLiftTarget;
         RobotLog.ii("CAL", "Enter - myLanderLift");
 
@@ -404,19 +474,22 @@ public class CallistoAutonomousBase extends LinearOpMode
         robot.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         // Ensure that the op mode is still active
-        if (opModeIsActive() && !isStopRequested() ) {
+        if (opModeIsActive() && !isStopRequested())
+        {
 
             // Determine new target position, and pass to motor controller
             if (direction == Direction.ROBOT_DOWN)
             {
-                newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int)(Inches * TICKS_PER_INCH);
-            } else if (direction == Direction.ROBOT_UP) {
+                newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (Inches * TICKS_PER_INCH);
+            }
+            else if (direction == Direction.ROBOT_UP)
+            {
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (-1 * Inches * TICKS_PER_INCH);
             }
             else
             {
                 Inches = 0;
-                newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int)(Inches * TICKS_PER_INCH);
+                newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (Inches * TICKS_PER_INCH);
             }
 
             robot.MLanderLift.setTargetPosition(newLiftTarget);
@@ -438,15 +511,16 @@ public class CallistoAutonomousBase extends LinearOpMode
             //        (runtime.seconds() < timeoutS) &&
             //       (robot.MLanderLift.isBusy() )) {
             RobotLog.ii("CAL", "Enter - myLanderLift - waiting to get to pos");
-            while (opModeIsActive() && !isStopRequested()  &&
+            while (opModeIsActive() && !isStopRequested() &&
                     (runtime.seconds() < timeoutS) &&
-                           (robot.MLanderLift.isBusy() )) {
+                    (robot.MLanderLift.isBusy()))
+            {
 
                 // Display it for the driver.
-                //telemetry.addData("Path1",  "Run time to %7f", runtime.seconds());
-                //telemetry.addData("Path2",  "Running at %7d :%7d",
+                telemetry.addData("Path1", "Run time to %7f", runtime.seconds());
+                //telemetry.addData("Path2", "Running at %7d :%7d",
                 //        robot.MLanderLift.getCurrentPosition());
-                //telemetry.update();
+                telemetry.update();
             }
             RobotLog.ii("CAL", "Enter - myLanderLift - reached pos");
 
@@ -467,11 +541,11 @@ public class CallistoAutonomousBase extends LinearOpMode
                                 double timeoutS)
     {
         RobotLog.ii("CAL", "Enter - myDetectionTest");
-        telemetry.addData("Path1",  "Position Detected %d", position);
+        telemetry.addData("Path1", "Position Detected %d", position);
         telemetry.update();
 
         // Ensure that the op mode is still active
-        if (opModeIsActive() && !isStopRequested() )
+        if (opModeIsActive() && !isStopRequested())
         {
             myLanderLift(Direction.ROBOT_DOWN, 1, 6.5, 9.0);
             // Determine new target position, and pass to motor controller
@@ -489,11 +563,12 @@ public class CallistoAutonomousBase extends LinearOpMode
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 15, 10.0);
                 rotate(70, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
-            } else // Position = 2 and default position
+            }
+            else // Position = 2 and default position
             {
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 18, 10.0);
                 //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 2, 10.0);
-                rotate(82 , TURN_SPEED);
+                rotate(82, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
             }
         }
