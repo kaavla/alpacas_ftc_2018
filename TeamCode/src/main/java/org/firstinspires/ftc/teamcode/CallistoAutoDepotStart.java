@@ -16,6 +16,7 @@ import static org.firstinspires.ftc.teamcode.Direction.ROBOT_DOWN;
 //@Disabled
 public class CallistoAutoDepotStart extends CallistoAutonomousBase
 {
+    CallistoHW robotCallisto = new CallistoHW();
 
     @Override
     public void runOpMode()
@@ -71,7 +72,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                //cube on left
+                //cube on robot right - human left
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 23, 10.0);
                 robot.markerServo.setPosition(0.9);
                 rotate(30, TURN_SPEED);
@@ -79,10 +80,11 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 rotate(72, TURN_SPEED);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 3, 10.0);
                 myEncoderDrive(Direction.FORWARD, 0.95, 71, 10.0);
+                robotCallisto.collectionLiftDown(0.9);
             }
              else if (position == 3)
             {
-                //cube on right
+                //cube on robot left - human right
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 20, 10.0);
                 rotate(-30, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0);

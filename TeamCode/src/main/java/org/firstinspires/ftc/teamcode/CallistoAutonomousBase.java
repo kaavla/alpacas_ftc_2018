@@ -285,7 +285,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                     }
                     telemetry.update();
                     ///////////////////////////////////
-                    if (updatedRecognitions.size() == 3)
+                    /*if (updatedRecognitions.size() == 3)
                     {
                         int goldMineralX = -1;
                         int silverMineral1X = -1;
@@ -327,7 +327,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                             }
                         }
                     }
-                    telemetry.update();
+                    telemetry.update();*/
                 }
             }
         }
