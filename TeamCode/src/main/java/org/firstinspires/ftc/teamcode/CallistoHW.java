@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+
 public class CallistoHW
 {
     public DcMotor leftMotor = null;
@@ -25,6 +27,10 @@ public class CallistoHW
     public CRServo spinnerServo = null;
     public Servo trayServo = null;
     public Servo markerServo = null;
+
+    static final double     REFERENCE_ANGLE           = 165;
+    Orientation lastAngles = new Orientation();
+    double globalAngle, power = .30, correction;
 
     public BNO055IMU imu = null;
 

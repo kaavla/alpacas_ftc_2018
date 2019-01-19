@@ -11,6 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import static org.firstinspires.ftc.teamcode.Direction.ROBOT_DOWN;
+import static org.firstinspires.ftc.teamcode.Mihika_AutonomousMode2.REFERENCE_ANGLE;
 
 @Autonomous(name="Callisto Depot Start", group="Callisto")
 //@Disabled
@@ -43,6 +44,8 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         }
 
         positionGold = myTFOD(2);
+        double current_angle = getAbsoluteAngle();
+        rotate((int)(REFERENCE_ANGLE - current_angle), TURN_SPEED);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
         myLanderLift(Direction.ROBOT_UP, 1, 5, 5.0);
