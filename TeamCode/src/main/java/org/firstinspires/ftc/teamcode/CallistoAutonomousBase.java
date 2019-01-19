@@ -16,6 +16,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.TFObjectDetector;
 
 import java.util.List;
 
+
 enum Direction
 {
     FORWARD, BACKWARD, STRAFE_RIGHT, STRAFE_LEFT, ROBOT_UP, ROBOT_DOWN;
@@ -31,6 +32,8 @@ public class CallistoAutonomousBase extends LinearOpMode
     private Orientation lastAngles = new Orientation();
     private double globalAngle = 0;
     public Direction direction;
+    double ref_angle = 0;
+
 
     static final double COUNTS_PER_MOTOR_REV = 1440;    // eg: TETRIX Motor Encoder
     static final double DRIVE_GEAR_REDUCTION = 1.0;     // This is < 1.0 if geared UP
@@ -141,7 +144,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         globalAngle = 0;
     }
 
-    private double getAngle()
+    public double getAngle()
     {
         // We experimentally determined the Z axis is the axis we want to use for heading angle.
         // We have to process the angle because the imu works in euler angles so the Z axis is
@@ -163,6 +166,31 @@ public class CallistoAutonomousBase extends LinearOpMode
 
         return globalAngle;
     }
+
+    public double getAbsoluteAngle()
+    {
+        // We experimentally determined the Z axis is the axis we want to use for heading angle.
+        // We have to process the angle because the imu works in euler angles so the Z axis is
+        // returned as 0 to +180 or 0 to -180 rolling back to -179 or +179 when rotation passes
+        // 180 degrees. We detect this transition and track the total cumulative angle of rotation.
+
+        Orientation angles = robot.imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+
+        double deltaAngle = angles.firstAngle - lastAngles.firstAngle;
+
+        if (deltaAngle < -180)
+            deltaAngle += 360;
+        else if (deltaAngle > 180)
+            deltaAngle -= 360;
+
+        globalAngle += deltaAngle;
+
+        lastAngles = angles;
+
+        return globalAngle;
+    }
+
+
 
     public void rotate(int degrees, double power)
     {
@@ -540,6 +568,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                                 double speed,
                                 double timeoutS)
     {
+        double curr_angle ;
         RobotLog.ii("CAL", "Enter - myDetectionTest");
         telemetry.addData("Path1", "Position Detected %d", position);
         telemetry.update();
@@ -548,25 +577,34 @@ public class CallistoAutonomousBase extends LinearOpMode
         if (opModeIsActive() && !isStopRequested())
         {
             myLanderLift(Direction.ROBOT_DOWN, 1, 6.5, 9.0);
+
+            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 6, 10.0);
+            curr_angle = getAngle();
+            telemetry.addData("status", "curr_angle = %f", curr_angle);
+            telemetry.update();
+
+            rotate((int)((-1)*(curr_angle - ref_angle )), TURN_SPEED);
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 18, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
+                //double current_angle = getAbsoluteAngle();
+                //rotate((int)(REFERENCE_ANGLE - current_angle), TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
-                rotate(80, TURN_SPEED);
+                rotate(76, TURN_SPEED);
                 //myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 11, 10.0);
             }
             else if (position == 3)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 18, 10.0);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 15, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 17, 10.0);
                 rotate(70, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
             }
             else // Position = 2 and default position
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 18, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
                 //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 2, 10.0);
                 rotate(82, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);

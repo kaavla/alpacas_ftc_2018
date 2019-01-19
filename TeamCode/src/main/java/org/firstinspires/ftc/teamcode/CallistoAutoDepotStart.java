@@ -11,7 +11,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import static org.firstinspires.ftc.teamcode.Direction.ROBOT_DOWN;
-import static org.firstinspires.ftc.teamcode.Mihika_AutonomousMode2.REFERENCE_ANGLE;
 
 @Autonomous(name="Callisto Depot Start", group="Callisto")
 //@Disabled
@@ -30,6 +29,11 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
          */
         initHW();
 
+        ref_angle = getAngle();
+        telemetry.addData("status", "ref_angle = %f", ref_angle);
+        telemetry.update();
+
+
         // Send telemetry message to signify robot waiting;
         //telemetry.addData("Status", "Resetting Encoders");    //
         //telemetry.update();
@@ -39,21 +43,19 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         // Do not use waitForStart() if you have Motorola E4 phones.
         //waitForStart();
         while (!opModeIsActive() && !isStopRequested()) {
-            telemetry.addData("status", "waiting for start command...");
-            telemetry.update();
+            //telemetry.addData("status", "waiting for start command...");
+            //telemetry.update();
         }
 
         positionGold = myTFOD(2);
-        double current_angle = getAbsoluteAngle();
-        rotate((int)(REFERENCE_ANGLE - current_angle), TURN_SPEED);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
         myLanderLift(Direction.ROBOT_UP, 1, 5, 5.0);
 
         //sleep(50);     // pause for servos to move
 
-        telemetry.addData("Path", "Run Complete");
-        telemetry.update();
+        //telemetry.addData("Path", "Run Complete");
+        //telemetry.update();
         RobotLog.ii("CAL", "Exit - runOpMode - CallistoAutoDepotStart");
 
     }
@@ -77,7 +79,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
             {
                 //cube on robot right - human left
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 23, 10.0);
-                robot.markerServo.setPosition(0.9);
+                robot.markerServo.setPosition(0.7);
                 rotate(30, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 9, 10.0);
                 rotate(72, TURN_SPEED);
@@ -89,18 +91,18 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
             {
                 //cube on robot left - human right
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 20, 10.0);
-                rotate(-30, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0);
-                robot.markerServo.setPosition(0.9);
-                myEncoderDrive(Direction.BACKWARD, 0.95, 51, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 3, 10.0);
-                myEncoderDrive(Direction.BACKWARD, 0.95, 12, 10.0);
+                robot.markerServo.setPosition(0.7);
+                rotate(328, TURN_SPEED);
+                //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 51, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 5, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 12, 10.0);
             } else // Position = 2 also default position
             {
                 //cube in middle
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 4, 5.0);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 28, 10.0);
-                robot.markerServo.setPosition(0.9);
+                robot.markerServo.setPosition(0.7);
                 rotate(-44, TURN_SPEED);
                 myEncoderDrive(Direction.BACKWARD, 0.95, 69, 10.0);
             }

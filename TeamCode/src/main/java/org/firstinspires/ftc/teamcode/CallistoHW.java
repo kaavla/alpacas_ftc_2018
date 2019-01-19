@@ -28,7 +28,7 @@ public class CallistoHW
     public Servo trayServo = null;
     public Servo markerServo = null;
 
-    static final double     REFERENCE_ANGLE           = 165;
+    //static final double     REFERENCE_ANGLE           = 165;
     Orientation lastAngles = new Orientation();
     double globalAngle, power = .30, correction;
 
