@@ -598,8 +598,8 @@ public class CallistoAutonomousBase extends LinearOpMode
             else if (position == 3)
             {
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 17, 10.0);
-                rotate(70, TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 16, 10.0);
+                rotate(73, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
             }
             else // Position = 2 and default position
