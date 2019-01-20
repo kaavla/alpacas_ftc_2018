@@ -62,7 +62,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         //Empty Function
     }
 
-    public void initHW()
+    public void initHW()    
     {
         RobotLog.ii("CAL", "Enter -  initHW");
         robot.init(hardwareMap);
@@ -578,7 +578,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         {
             myLanderLift(Direction.ROBOT_DOWN, 1, 6.5, 9.0);
 
-            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 6, 10.0);
+            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 8, 10.0);
             curr_angle = getAngle();
             telemetry.addData("status", "curr_angle = %f", curr_angle);
             telemetry.update();

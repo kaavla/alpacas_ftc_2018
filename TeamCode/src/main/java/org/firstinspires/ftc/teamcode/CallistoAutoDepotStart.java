@@ -78,33 +78,37 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
             if (position == 1)
             {
                 //cube on robot right - human left
-                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 23, 10.0);
+                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 15, 10.0);
+                rotate(36, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 21, 10.0);
                 robot.markerServo.setPosition(0.7);
-                rotate(30, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 9, 10.0);
-                rotate(72, TURN_SPEED);
-                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 3, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 71, 10.0);
-                robotCallisto.collectionLiftDown(0.9);
+                rotate(80, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 13, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 9, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 58, 10.0);
+                myCollectionLiftDown(0.7, 1.0);
             }
              else if (position == 3)
             {
                 //cube on robot left - human right
-                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 20, 10.0);
+                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 25, 10.0);
                 robot.markerServo.setPosition(0.7);
-                rotate(328, TURN_SPEED);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 3, 5.0);
+                rotate(122, TURN_SPEED);
                 //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 51, 10.0);
-                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 5, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 12, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 48, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 9, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 16, 10.0);
+                myCollectionLiftDown(0.7, 1.0);
             } else // Position = 2 also default position
             {
                 //cube in middle
-                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 4, 5.0);
+                //myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 4, 5.0);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 28, 10.0);
                 robot.markerServo.setPosition(0.7);
-                rotate(-44, TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD, 0.95, 69, 10.0);
+                rotate(116, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, 0.95, 69, 10.0);
+                myCollectionLiftDown(0.7, 1.0);
             }
 
         }
