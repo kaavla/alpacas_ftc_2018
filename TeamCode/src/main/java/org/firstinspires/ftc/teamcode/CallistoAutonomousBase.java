@@ -28,7 +28,7 @@ public class CallistoAutonomousBase extends LinearOpMode
 {
 
     public CallistoHW robot = new CallistoHW();
-    private ElapsedTime runtime = new ElapsedTime();
+    public ElapsedTime runtime = new ElapsedTime();
     private Orientation lastAngles = new Orientation();
     private double globalAngle = 0;
     public Direction direction;
@@ -613,4 +613,26 @@ public class CallistoAutonomousBase extends LinearOpMode
         RobotLog.ii("CAL", "Exit - myDetectionTest");
 
     }
+
+    public void myCollectionLiftDown(double power, double timeoutS)
+    {
+        RobotLog.ii("CAL", "Enter - myCollectionLiftDown - waiting to get to pos");
+        runtime.reset();
+        robot.collectionLiftDown(power);
+        while (opModeIsActive() && !isStopRequested() &&
+                (runtime.seconds() < timeoutS))
+        {
+
+            // Display it for the driver.
+            telemetry.addData("Path1", "Run time to %7f", runtime.seconds());
+            //telemetry.addData("Path2", "Running at %7d :%7d",
+            //        robot.MLanderLift.getCurrentPosition());
+            telemetry.update();
+        }
+        robot.collectionLiftDown(0);
+        RobotLog.ii("CAL", "Enter - myCollectionLiftDown - reached pos");
+
+    }
+
+
 }
