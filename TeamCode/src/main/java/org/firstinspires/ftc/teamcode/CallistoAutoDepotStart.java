@@ -43,8 +43,8 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         // Do not use waitForStart() if you have Motorola E4 phones.
         //waitForStart();
         while (!opModeIsActive() && !isStopRequested()) {
-            //telemetry.addData("status", "waiting for start command...");
-            //telemetry.update();
+            telemetry.addData("status", "waiting for start command...");
+            telemetry.update();
         }
 
         positionGold = myTFOD(2);
