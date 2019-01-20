@@ -80,12 +80,13 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 //cube on robot right - human left
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 15, 10.0);
                 rotate(36, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 21, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 19, 10.0);
                 robot.markerServo.setPosition(0.7);
-                rotate(80, TURN_SPEED);
+                sleep(1000);
+                rotate(78, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 13, 10.0);
-                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 9, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 58, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 11, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 50, 10.0);
                 myCollectionLiftDown(0.7, 1.0);
             }
              else if (position == 3)
@@ -93,12 +94,13 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 //cube on robot left - human right
                 myEncoderDrive(Direction.FORWARD, TURN_SPEED, 25, 10.0);
                 robot.markerServo.setPosition(0.7);
+                sleep(1000);
                 myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 3, 5.0);
                 rotate(122, TURN_SPEED);
                 //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0);
                 myEncoderDrive(Direction.FORWARD, 0.95, 48, 10.0);
-                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 9, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 16, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 12, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 6, 10.0);
                 myCollectionLiftDown(0.7, 1.0);
             } else // Position = 2 also default position
             {
@@ -106,8 +108,11 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 //myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 4, 5.0);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 28, 10.0);
                 robot.markerServo.setPosition(0.7);
-                rotate(116, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, 0.95, 69, 10.0);
+                sleep(1000);
+                rotate(113, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, 0.95, 15, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 3, 5.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 50, 10.0);
                 myCollectionLiftDown(0.7, 1.0);
             }
 
