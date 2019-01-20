@@ -11,12 +11,10 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 @Autonomous(name="Callisto Auto Crater Advanced - 2", group="Callisto")
 //@Disabled
-public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
-{
+public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase {
 
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() {
         int positionGold = 2;
         /*
          * Initialize the drive system variables.
@@ -46,55 +44,37 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase
 
     private void myDetectionRun(int position,
                                 double speed,
-                                double timeoutS)
-    {
+                                double timeoutS) {
 
 
         //initialized the motor encoders
         initMotorEncoders();
 
         // Ensure that the op mode is still active
-        if (opModeIsActive())
-        {
+        if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
+            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 10, 10.0);
+            rotate(76, TURN_SPEED);
             if (position == 1)
             //gold mineral is right most side when standing near the lander lift
             {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 12, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT,DRIVE_SPEED + 0.2,88.5,10.0); //PERFECT
-                rotate(125,TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,31,10.0);
-                robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,60,10.0);
-                rotate(10,TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,12,10.0);
-            } else if (position == 3)
-            //gold mineral on left most side when standing near the lander lift
-            {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 12, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 35.5, 10.0);
-                rotate(127,TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,39,10.0);
-                robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,60,10.0);
-                rotate(10,TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,10.5,10.0); // PERFECT
-
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2,61, 10.0); //P
+                //gold mineral on left most side when standing near the lander lift
+            } else if (position == 3) {
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2, 29, 10.0);`
             } else // Position = 2 also default position
             //gold mineral in center
             {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 10, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 62, 10.0);
-                rotate(125,TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,31,10.0);
-                robot.markerServo.setPosition(-0.9);
-                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,59,10.0);
-                rotate(10,TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD,DRIVE_SPEED,11,10.0);//PERFECT
-
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2, 49, 10.0);//PERFECT
             }
-
+                rotate(30, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 43, 10.0);
+                robot.markerServo.setPosition(0.7);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 50, 10.0);
+                rotate(180, TURN_SPEED);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0); //
+                myCollectionLiftDown(0.7, 1.0);
         }
     }
 }
