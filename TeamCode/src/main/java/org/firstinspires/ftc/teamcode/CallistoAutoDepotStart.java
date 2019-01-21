@@ -87,6 +87,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 13, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 11, 10.0);
                 myEncoderDrive(Direction.FORWARD, 0.95, 50, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, TURN_SPEED, 9, 5.0);
                 myCollectionLiftDown(0.7, 1.0);
             }
              else if (position == 3)
@@ -113,6 +114,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 myEncoderDrive(Direction.FORWARD, 0.95, 15, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 3, 5.0);
                 myEncoderDrive(Direction.FORWARD, 0.95, 50, 10.0);
+                myEncoderDrive(Direction.STRAFE_RIGHT, TURN_SPEED, 9, 5.0);
                 myCollectionLiftDown(0.7, 1.0);
             }
 

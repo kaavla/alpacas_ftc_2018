@@ -62,7 +62,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase {
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2,61, 10.0); //P
                 //gold mineral on left most side when standing near the lander lift
             } else if (position == 3) {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2, 29, 10.0);`
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2, 29, 10.0);
             } else // Position = 2 also default position
             //gold mineral in center
             {

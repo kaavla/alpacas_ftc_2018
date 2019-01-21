@@ -583,7 +583,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             telemetry.addData("status", "curr_angle = %f", curr_angle);
             telemetry.update();
 
-            rotate((int)((-1)*(curr_angle - ref_angle )), TURN_SPEED);
+            rotate((int)((-1)*(curr_angle - ref_angle )), 0.3);
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
