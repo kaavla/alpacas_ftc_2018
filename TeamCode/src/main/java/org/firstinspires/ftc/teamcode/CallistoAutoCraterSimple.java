@@ -65,7 +65,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
             if (position == 1)
             //right most side when standing near the lander lift
                 {
-                    myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 20.0);
+                    //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 20.0);
                     myCollectionLiftDown(0.7, 1.0);
                 //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0); //PERFECT
                 //myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,16,10.0);\
@@ -73,7 +73,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
              } else if (position == 3)
             //left most side when standing near the lander lift
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 20.0);
+                //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 20.0);
                 myCollectionLiftDown(0.7, 1.0);
                 //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 11, 20.0);//PERFECT
                 //myEncoderDrive(Direction.STRAFE_RIGHT,DRIVE_SPEED,53,20.0);
@@ -84,7 +84,7 @@ public class CallistoAutoCraterSimple extends CallistoAutonomousBase {
             } else // Position = 2 also default position
             //center
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 20.0);
+                //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 20.0);
                 myCollectionLiftDown(0.7, 1.0);
                 //myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 20.0);//PERFECT
                 //rotate(-180, TURN_SPEED);
