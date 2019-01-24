@@ -606,6 +606,7 @@ public class CallistoAutonomousBase extends LinearOpMode
             {
                 myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
                 //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 2, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 6, 10.0);
                 rotate(82, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
             }
