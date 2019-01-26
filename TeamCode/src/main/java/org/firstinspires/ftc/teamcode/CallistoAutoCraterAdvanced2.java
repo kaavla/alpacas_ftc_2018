@@ -27,7 +27,11 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase {
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
-        waitForStart();
+        //waitForStart();
+        while (!opModeIsActive() && !isStopRequested()) {
+            telemetry.addData("status", "waiting for start command...");
+            telemetry.update();
+        }
 
         positionGold = myTFOD(2);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
