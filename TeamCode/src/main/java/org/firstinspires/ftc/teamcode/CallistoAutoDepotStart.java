@@ -50,7 +50,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
         positionGold = myTFOD(2);
         myDetectionTest(positionGold, DRIVE_SPEED, 40.0);
         myDetectionRun(positionGold, DRIVE_SPEED, 40.0);
-        myLanderLift(Direction.ROBOT_UP, 1, 5, 5.0);
+        myLanderLift(Direction.ROBOT_UP, 1, 3, 2.0);
 
         //sleep(50);     // pause for servos to move
 

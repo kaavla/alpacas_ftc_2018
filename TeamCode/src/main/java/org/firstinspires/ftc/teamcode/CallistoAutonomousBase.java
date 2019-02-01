@@ -46,7 +46,8 @@ public class CallistoAutonomousBase extends LinearOpMode
     //Need to Change
 
     static final double DRIVE_SPEED = 0.7;
-    static final double TURN_SPEED = 0.8;
+    static final double TURN_SPEED = 0.7;
+    //maybe change to 0.6
 
     final String TFOD_MODEL_ASSET = "RoverRuckus.tflite";
     final String LABEL_GOLD_MINERAL = "Gold Mineral";
@@ -577,7 +578,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         // Ensure that the op mode is still active
         if (opModeIsActive() && !isStopRequested())
         {
-            myLanderLift(Direction.ROBOT_DOWN, 1, 6.5, 9.0);
+            myLanderLift(Direction.ROBOT_DOWN, 1, 6.5, 4.0);
 
             myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 8, 10.0);
             curr_angle = getAngle();
