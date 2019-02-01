@@ -59,26 +59,26 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase {
 
             // Determine new target position, and pass to motor controller
             myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 10, 10.0);
-            rotate(76, TURN_SPEED);
+            rotate(76, TURN_SPEED + 0.3);
             if (position == 1)
             //gold mineral is right most side when standing near the lander lift
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2,60, 10.0); //P
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3,59, 10.0); //changed
                 //gold mineral on left most side when standing near the lander lift
             } else if (position == 3) {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2, 27, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 28, 10.0);//PERFECT
             } else // Position = 2 also default position
             //gold mineral in center
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.2, 49, 10.0);//PERFECT
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 50, 10.0);//chnaged
             }
-            rotate(33, TURN_SPEED);
-            myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.4, 39, 10.0);
+            rotate(33, TURN_SPEED + 0.3);
+            myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 39, 10.0);
             robot.markerServo.setPosition(0.7);
-            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.4, 50, 10.0);
-            rotate(180, TURN_SPEED);
-            myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0); //
-            myCollectionLiftDown(0.7, 1.0);
+            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 65, 10.0);
+            myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED + 0.3, 4,   10.0);
+            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 10, 10.0);
+           // myCollectionLiftDown(0.7, 1.0);
         }
     }
 }
