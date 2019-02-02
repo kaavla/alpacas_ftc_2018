@@ -73,6 +73,8 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase {
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 45, 10.0);//chnaged
             }
             rotate(31, TURN_SPEED + 0.3);
+            myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED + 0.3, 12, 10.0);
+            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED + 0.3, 7, 10.0);
             myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 39, 10.0);
             robot.markerServo.setPosition(0.7);
             sleep(1000);
