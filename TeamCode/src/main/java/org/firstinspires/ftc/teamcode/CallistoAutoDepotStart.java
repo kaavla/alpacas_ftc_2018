@@ -86,7 +86,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 rotate(78, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 10, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 11, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 47, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 52, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, TURN_SPEED, 9, 5.0);
                 myCollectionLiftDown(0.7, 1.0);
             }
@@ -101,7 +101,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 12, 10.0);
                 myEncoderDrive(Direction.FORWARD, 0.95, 48, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 12, 10.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 6, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 10, 10.0);
                 myCollectionLiftDown(0.7, 1.0);
             } else // Position = 2 also default position
             {
@@ -113,7 +113,7 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 rotate(113, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, 0.95, 15, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 3, 5.0);
-                myEncoderDrive(Direction.FORWARD, 0.95, 50, 10.0);
+                myEncoderDrive(Direction.FORWARD, 0.95, 54, 10.0);
                 myEncoderDrive(Direction.STRAFE_RIGHT, TURN_SPEED, 9, 5.0);
                 myCollectionLiftDown(0.7, 1.0);
             }
