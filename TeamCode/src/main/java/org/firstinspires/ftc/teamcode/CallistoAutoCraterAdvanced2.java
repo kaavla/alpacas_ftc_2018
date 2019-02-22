@@ -58,29 +58,29 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 10, 10.0);
+            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 10, 10.0, SensorsToUse.NONE);
             rotate(76, TURN_SPEED + 0.3);
             if (position == 1)
             //gold mineral is right most side when standing near the lander lift
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 58, 10.0); //changed
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 58, 10.0, SensorsToUse.NONE); //changed
                 //gold mineral on left most side when standing near the lander lift
             } else if (position == 3) {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 25, 10.0);//PERFECT
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 25, 10.0, SensorsToUse.NONE);//PERFECT
             } else // Position = 2 also default position
             //gold mineral in center
             {
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 45, 10.0);//chnaged
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 45, 10.0, SensorsToUse.NONE);//chnaged
             }
             rotate(31, TURN_SPEED + 0.3);
-            myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED + 0.3, 12, 10.0);
-            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED + 0.3, 7, 10.0);
-            myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 39, 10.0);
+            myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED + 0.3, 12, 10.0, SensorsToUse.NONE);
+            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED + 0.3, 7, 10.0, SensorsToUse.NONE);
+            myEncoderDrive(Direction.FORWARD, DRIVE_SPEED + 0.3, 39, 10.0, SensorsToUse.NONE);
             robot.markerServo.setPosition(0.7);
             sleep(1000);
-            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 55, 10.0);
-            myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED + 0.3, 10,   10.0);
-            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 15, 10.0);
+            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 55, 10.0, SensorsToUse.NONE);
+            myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED + 0.3, 10,   10.0, SensorsToUse.NONE);
+            myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 15, 10.0, SensorsToUse.NONE);
            // myCollectionLiftDown(0.7, 1.0);
         }
     }

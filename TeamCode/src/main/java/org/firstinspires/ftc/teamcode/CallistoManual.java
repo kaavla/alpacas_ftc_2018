@@ -171,11 +171,11 @@ public class CallistoManual extends LinearOpMode
             }
             else if (gamepad2.dpad_up)
             {
-                robotCallisto.collectionSlideIn(0.7);
+                robotCallisto.collectionSlideIn(0.5);
             }
             else if (gamepad2.dpad_down)
             {
-                robotCallisto.collectionSlideOut(0.7);
+                robotCallisto.collectionSlideOut(0.5);
             }
             else if (gamepad2.dpad_left)
             {
@@ -187,11 +187,11 @@ public class CallistoManual extends LinearOpMode
             }
             else if (gamepad2.y)
             {
-                robotCallisto.collectionDropLiftUp(0.9);
+                robotCallisto.collectionDropLiftUp(0.7);
             }
             else if (gamepad2.a)
             {
-                robotCallisto.collectionDropLiftDown(0.9);
+                robotCallisto.collectionDropLiftDown(0.7);
             }
             else if (gamepad2.left_bumper)
             {

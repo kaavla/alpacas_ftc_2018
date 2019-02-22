@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.RobotLog;
 
@@ -9,6 +12,7 @@ import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -21,6 +25,12 @@ enum Direction
 {
     FORWARD, BACKWARD, STRAFE_RIGHT, STRAFE_LEFT, ROBOT_UP, ROBOT_DOWN;
 }
+
+enum SensorsToUse
+{
+    NONE, USE_COLOR, USE_DISTANCE, USE_TOUCH;
+}
+
 
 //@Autonomous(name="CallistoAutonomousBase", group="Callisto")
 //@Disabled
@@ -64,7 +74,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         //Empty Function
     }
 
-    public void initHW()    
+    public void initHW()
     {
         RobotLog.ii("CAL", "Enter -  initHW");
         robot.init(hardwareMap);
@@ -372,7 +382,7 @@ public class CallistoAutonomousBase extends LinearOpMode
     }
 
 
-    public void myEncoderDrive(Direction direction, double speed, double Inches, double timeoutS)
+    public void myEncoderDrive(Direction direction, double speed, double Inches, double timeoutS, SensorsToUse sensors_2_use)
     {
         int newLeftTarget = 0;
         int newRightTarget = 0;
@@ -435,6 +445,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                 newRightBackTarget = robot.backleftMotor.getCurrentPosition() + (int) (Inches * COUNTS_PER_INCH);
             }
 
+
             robot.leftMotor.setTargetPosition(newLeftTarget);
             robot.rightMotor.setTargetPosition(newRightTarget);
             robot.backleftMotor.setTargetPosition(newLeftBackTarget);
@@ -464,6 +475,39 @@ public class CallistoAutonomousBase extends LinearOpMode
                     (runtime.seconds() < timeoutS) &&
                     (robot.leftMotor.isBusy()))
             {
+
+                if (sensors_2_use == SensorsToUse.USE_COLOR)
+                {
+
+                }
+                if (sensors_2_use == SensorsToUse.USE_DISTANCE)
+                {
+                    if (robot.sensorRange.getDistance(DistanceUnit.INCH) < 5) {
+                        int count = 0;
+                        while (opModeIsActive() && !isStopRequested() &&
+                                (runtime.seconds() < timeoutS) &&
+                                (count < 20) &&
+                                (robot.sensorRange.getDistance(DistanceUnit.INCH) < 5)) {
+                            sleep(100);
+                            count++;
+                        }
+                    }
+
+                }
+
+                if (sensors_2_use == SensorsToUse.USE_TOUCH)
+                {
+                    robot.digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+
+                    if (robot.digitalTouch.getState() == true) {
+                        telemetry.addData("Digital Touch", "Is Not Pressed");
+                    } else {
+                        telemetry.addData("Digital Touch", "Is Pressed");
+                        break;
+                    }
+                    telemetry.update();
+
+                }
 
                 // Display it for the driver.
                 telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
@@ -580,7 +624,7 @@ public class CallistoAutonomousBase extends LinearOpMode
         {
             myLanderLift(Direction.ROBOT_DOWN, 1, 6.5, 4.0);
 
-            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 8, 10.0);
+            myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 8, 10.0, SensorsToUse.NONE);
             curr_angle = getAngle();
             telemetry.addData("status", "curr_angle = %f", curr_angle);
             telemetry.update();
@@ -589,28 +633,28 @@ public class CallistoAutonomousBase extends LinearOpMode
             // Determine new target position, and pass to motor controller
             if (position == 1)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0, SensorsToUse.NONE);
                 //double current_angle = getAbsoluteAngle();
                 //rotate((int)(REFERENCE_ANGLE - current_angle), TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0, SensorsToUse.NONE);
                 rotate(76, TURN_SPEED);
                 //myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 11, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 11, 10.0, SensorsToUse.NONE);
             }
             else if (position == 3)
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 16, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 16, 10.0, SensorsToUse.NONE);
                 rotate(73, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0);
+                myEncoderDrive(Direction.FORWARD, TURN_SPEED, 13, 10.0, SensorsToUse.NONE);
             }
             else // Position = 2 and default position
             {
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 12, 10.0, SensorsToUse.NONE);
                 //myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 2, 10.0);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 4, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 4, 10.0, SensorsToUse.NONE);
                 rotate(82, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 15, 10.0, SensorsToUse.NONE);
             }
         }
         RobotLog.ii("CAL", "Exit - myDetectionTest");
