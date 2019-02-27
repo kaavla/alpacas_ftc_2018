@@ -4,6 +4,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -27,6 +29,10 @@ public class CallistoHW
     public CRServo spinnerServo = null;
     public Servo trayServo = null;
     public Servo markerServo = null;
+
+    public DigitalChannel digitalTouch = null;  // Hardware Device Object
+    public DistanceSensor sensorRange = null;
+
 
     //static final double     REFERENCE_ANGLE           = 165;
     Orientation lastAngles = new Orientation();
@@ -52,6 +58,11 @@ public class CallistoHW
         spinnerServo = ahwMap.get(CRServo.class, "spinnerServo");
         trayServo = ahwMap.get(Servo.class, "trayServo");
         markerServo = ahwMap.get(Servo.class, "markerServo");
+
+        digitalTouch = ahwMap.get(DigitalChannel.class, "sensor_digital");
+        sensorRange = ahwMap.get(DistanceSensor.class, "sensor_range");
+
+
 
         imu = ahwMap.get(BNO055IMU.class, "imu");
 

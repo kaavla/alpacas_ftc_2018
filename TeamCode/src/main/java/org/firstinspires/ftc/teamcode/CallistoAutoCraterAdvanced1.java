@@ -55,20 +55,20 @@ public class CallistoAutoCraterAdvanced1 extends CallistoAutonomousBase {
 
             // Determine new target position, and pass to motor controller
             if (position == 1) {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0, SensorsToUse.NONE);
             } else if (position == 3) {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 7, 10.0, SensorsToUse.NONE);
                 rotate(75, TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 70, 10.0);
+                myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 70, 10.0, SensorsToUse.NONE);
                 rotate(15,TURN_SPEED);
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,90, 20.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED,90, 20.0, SensorsToUse.NONE);
 
             } else // Position = 2 also default position
             {
-                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 12, 10.0);
-                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 45, 10.0);
+                myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED, 12, 10.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.STRAFE_LEFT, DRIVE_SPEED, 45, 10.0, SensorsToUse.NONE);
                 rotate(125,TURN_SPEED);
-                myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,84,10.0);
+                myEncoderDrive(Direction.FORWARD,DRIVE_SPEED,84,10.0, SensorsToUse.NONE);
             }
 
         }
