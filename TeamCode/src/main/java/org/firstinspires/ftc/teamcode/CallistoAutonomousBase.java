@@ -508,11 +508,11 @@ public class CallistoAutonomousBase extends LinearOpMode
         {
 
             // Determine new target position, and pass to motor controller
-            if (direction == Direction.ROBOT_DOWN)
+            if (direction == Direction.ROBOT_UP)
             {
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (Inches * TICKS_PER_INCH);
             }
-            else if (direction == Direction.ROBOT_UP)
+            else if (direction == Direction.ROBOT_DOWN)
             {
                 newLiftTarget = robot.MLanderLift.getCurrentPosition() + (int) (-1 * Inches * TICKS_PER_INCH);
             }
