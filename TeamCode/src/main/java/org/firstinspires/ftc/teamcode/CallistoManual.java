@@ -171,11 +171,11 @@ public class CallistoManual extends LinearOpMode
             }
             else if (gamepad2.dpad_up)
             {
-                robotCallisto.collectionSlideIn(0.7);
+                robotCallisto.collectionSlideIn(1);
             }
             else if (gamepad2.dpad_down)
             {
-                robotCallisto.collectionSlideOut(0.7);
+                robotCallisto.collectionSlideOut(1);
             }
             else if (gamepad2.dpad_left)
             {
