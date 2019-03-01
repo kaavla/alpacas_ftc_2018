@@ -30,8 +30,8 @@ public class CallistoHW
     public Servo trayServo = null;
     public Servo markerServo = null;
 
-    public DigitalChannel digitalTouch = null;  // Hardware Device Object
-    public DistanceSensor sensorRange = null;
+    //public DigitalChannel digitalTouch = null;  // Hardware Device Object
+    //public DistanceSensor sensorRange = null;
 
 
     //static final double     REFERENCE_ANGLE           = 165;
@@ -59,12 +59,12 @@ public class CallistoHW
         trayServo = ahwMap.get(Servo.class, "trayServo");
         markerServo = ahwMap.get(Servo.class, "markerServo");
 
-        digitalTouch = ahwMap.get(DigitalChannel.class, "sensor_digital");
-        sensorRange = ahwMap.get(DistanceSensor.class, "sensor_range");
+        //digitalTouch = ahwMap.get(DigitalChannel.class, "sensor_digital");
+        //sensorRange = ahwMap.get(DistanceSensor.class, "sensor_range");
 
 
 
-        imu = ahwMap.get(BNO055IMU.class, "imu");
+        imu = ahwMap.get(BNO055IMU.class, "imu 1");
 
         //initialize the IMU
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();

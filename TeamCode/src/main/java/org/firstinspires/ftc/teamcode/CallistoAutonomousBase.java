@@ -475,7 +475,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                     (runtime.seconds() < timeoutS) &&
                     (robot.leftMotor.isBusy()))
             {
-
+/*
                 if (sensors_2_use == SensorsToUse.USE_COLOR)
                 {
 
@@ -508,6 +508,7 @@ public class CallistoAutonomousBase extends LinearOpMode
                     telemetry.update();
 
                 }
+                */
 
                 // Display it for the driver.
                 telemetry.addData("Path1", "Running to %7d :%7d", newLeftTarget, newRightTarget);
