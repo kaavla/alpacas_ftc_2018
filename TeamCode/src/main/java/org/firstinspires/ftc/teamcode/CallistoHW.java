@@ -30,7 +30,7 @@ public class CallistoHW
     public Servo trayServo = null;
     public Servo markerServo = null;
 
-    //public DigitalChannel digitalTouch = null;  // Hardware Device Object
+    public DigitalChannel digitalTouch = null;  // Hardware Device Object
     //public DistanceSensor sensorRange = null;
 
 
@@ -59,7 +59,7 @@ public class CallistoHW
         trayServo = ahwMap.get(Servo.class, "trayServo");
         markerServo = ahwMap.get(Servo.class, "markerServo");
 
-        //digitalTouch = ahwMap.get(DigitalChannel.class, "sensor_digital");
+        digitalTouch = ahwMap.get(DigitalChannel.class, "sensor_digital");
         //sensorRange = ahwMap.get(DistanceSensor.class, "sensor_range");
 
 

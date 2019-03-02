@@ -18,72 +18,6 @@ public class CallistoManual extends LinearOpMode
     CallistoHW robotCallisto = new CallistoHW();
     private ElapsedTime runtime = new ElapsedTime();
 
-
-    public void myLanderLiftTest (int direction,
-                                  double speed,
-                                  double Inches,
-                                  double timeoutS) {
-        int newLiftTarget = 0;
-
-        robotCallisto.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robotCallisto.MLanderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        // Ensure that the op mode is still active
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            if (direction == 0)
-            {                //Go Up
-                newLiftTarget = robotCallisto.MLanderLift.getCurrentPosition() + (int)(Inches * 11.42 * 1120);
-            } else if (direction == 1) {
-                //Go down
-                newLiftTarget = robotCallisto.MLanderLift.getCurrentPosition() + (int) (-1 * Inches * 11.42 * 1120);
-            }
-            telemetry.addData("Path1",  "newLiftTarget %7d", newLiftTarget);
-            telemetry.addData("Path2",  "Curr Pos at %7d",
-                    robotCallisto.MLanderLift.getCurrentPosition());
-            telemetry.update();
-
-            robotCallisto.MLanderLift.setTargetPosition(newLiftTarget);
-
-            // Turn On RUN_TO_POSITION
-            robotCallisto.MLanderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            robotCallisto.MLanderLift.setPower(Math.abs(speed));
-
-            // keep looping while we are still active, and there is time left, and both motors are running.
-            // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
-            // its target position, the motion will stop.  This is "safer" in the event that the robot will
-            // always end the motion as soon as possible.
-            // However, if you require that BOTH motors have finished their moves before the robot continues
-            // onto the next step, use (isBusy() || isBusy()) in the loop test.
-            //while (opModeIsActive() &&
-            //        (runtime.seconds() < timeoutS) &&
-            //       (robot.MLanderLift.isBusy() )) {
-            while (opModeIsActive() &&
-                    (runtime.seconds() < timeoutS)) {
-
-                // Display it for the driver.
-                telemetry.addData("Path1",  "Run time to %7f", runtime.seconds());
-                telemetry.addData("Path2",  "Running at %7d ",
-                        robotCallisto.MLanderLift.getCurrentPosition());
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            robotCallisto.MLanderLift.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            robotCallisto.MLanderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            //sleep(50);   // optional pause after each move
-        }
-    }
-
-
-
     @Override
     public void runOpMode()
     {
@@ -97,7 +31,8 @@ public class CallistoManual extends LinearOpMode
         //waitForStart();
         // Do not use waitForStart() if you have Motorola E4 phones.
         //waitForStart();
-        while (!opModeIsActive() && !isStopRequested()) {
+        while (!opModeIsActive() && !isStopRequested())
+        {
             telemetry.addData("status", "waiting for start command...");
             telemetry.update();
         }
@@ -108,6 +43,17 @@ public class CallistoManual extends LinearOpMode
         while (opModeIsActive())
         {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.update();
+            if (robotCallisto.digitalTouch.getState() == true)
+            {
+                //Not pressed
+                telemetry.addData("Digital Touch", "Is Not Pressed");
+            }
+            else
+            {
+                //Pressed
+                telemetry.addData("Digital Touch", "Is Pressed");
+            }
             telemetry.update();
 
             if (gamepad1.dpad_up)
@@ -171,7 +117,20 @@ public class CallistoManual extends LinearOpMode
             }
             else if (gamepad2.dpad_up)
             {
-                robotCallisto.collectionSlideIn(1);
+                if (robotCallisto.digitalTouch.getState() == true)
+                {
+                    //Not pressed
+                    telemetry.addData("Digital Touch", "Is Not Pressed");
+                    robotCallisto.collectionSlideIn(1);
+                }
+                else
+                {
+                    //Pressed
+                    telemetry.addData("Digital Touch", "Is Pressed");
+                    robotCallisto.collectionSlideOut(0);
+                }
+
+
             }
             else if (gamepad2.dpad_down)
             {
