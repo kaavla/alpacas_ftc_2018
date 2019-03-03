@@ -81,7 +81,7 @@ public class CallistoAutoCraterAdvanced2 extends CallistoAutonomousBase {
             myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 55, 10.0, SensorsToUse.NONE);
             myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED + 0.3, 10,   10.0, SensorsToUse.NONE);
             myEncoderDrive(Direction.BACKWARD, DRIVE_SPEED + 0.3, 15, 10.0, SensorsToUse.NONE);
-           // myCollectionLiftDown(0.7, 1.0);
+
         }
     }
 }

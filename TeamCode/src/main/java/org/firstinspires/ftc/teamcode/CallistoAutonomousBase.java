@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
@@ -23,7 +24,7 @@ import java.util.List;
 
 enum Direction
 {
-    FORWARD, BACKWARD, STRAFE_RIGHT, STRAFE_LEFT, ROBOT_UP, ROBOT_DOWN;
+    FORWARD, BACKWARD, STRAFE_RIGHT, STRAFE_LEFT, ROBOT_UP, ROBOT_DOWN, SPINNER_FORWARD;
 }
 
 enum SensorsToUse
@@ -127,6 +128,17 @@ public class CallistoAutonomousBase extends LinearOpMode
         telemetry.addData("Path1", "Init TFOD Done");
         telemetry.update();
 
+    }
+
+    public void myCollectionSlideOut(double power, double timeoutS) {
+        robot.MCollectionSlide.setPower(-1 * power);
+        runtime.reset();
+
+        while (opModeIsActive() && !isStopRequested() &&
+                (runtime.seconds() < timeoutS)) {
+            //Do nothing
+        }
+        robot.MCollectionSlide.setPower(0);
     }
 
     public void initMotorEncoders()
@@ -609,6 +621,12 @@ public class CallistoAutonomousBase extends LinearOpMode
 
             //sleep(50);   // optional pause after each move
         }
+    }
+
+    public void turnspinnerservoforward(double power,
+                                        double timoutS)
+    {
+        robot.spinnerServo.setPower(power);
     }
 
 

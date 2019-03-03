@@ -83,12 +83,14 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 19, 10.0, SensorsToUse.NONE);
                 robot.markerServo.setPosition(0.3);
                 sleep(1000);
-                rotate(78, TURN_SPEED);
+                rotate(82, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, DRIVE_SPEED, 10, 10.0, SensorsToUse.NONE);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 11, 10.0, SensorsToUse.NONE);
-                myEncoderDrive(Direction.FORWARD, 0.95, 52, 10.0, SensorsToUse.NONE);
+//                myEncoderDrive(Direction.FORWARD, 0.95, 52, 10.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.FORWARD, 0.95, 30, 10.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.STRAFE_LEFT, TURN_SPEED, 6, 5.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.FORWARD, 0.95, 22, 10.0, SensorsToUse.NONE);
                 myEncoderDrive(Direction.STRAFE_RIGHT, TURN_SPEED, 9, 5.0, SensorsToUse.NONE);
-                myCollectionLiftDown(0.7, 1.0);
             }
              else if (position == 3)
             {
@@ -102,7 +104,6 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 myEncoderDrive(Direction.FORWARD, 0.95, 48, 10.0, SensorsToUse.NONE);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 12, 10.0, SensorsToUse.NONE);
                 myEncoderDrive(Direction.FORWARD, 0.95, 10, 10.0, SensorsToUse.NONE);
-                myCollectionLiftDown(0.7, 1.0);
             } else // Position = 2 also default position
             {
                 //cube in middle
@@ -113,11 +114,17 @@ public class CallistoAutoDepotStart extends CallistoAutonomousBase
                 rotate(113, TURN_SPEED);
                 myEncoderDrive(Direction.FORWARD, 0.95, 15, 10.0, SensorsToUse.NONE);
                 myEncoderDrive(Direction.STRAFE_RIGHT, DRIVE_SPEED, 3, 5.0, SensorsToUse.NONE);
-                myEncoderDrive(Direction.FORWARD, 0.95, 54, 10.0, SensorsToUse.NONE);
+                //myEncoderDrive(Direction.FORWARD, 0.95, 54, 10.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.FORWARD, 0.95, 30, 10.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.STRAFE_LEFT, TURN_SPEED, 4, 5.0, SensorsToUse.NONE);
+                myEncoderDrive(Direction.FORWARD, 0.95, 24, 10.0, SensorsToUse.NONE);
                 myEncoderDrive(Direction.STRAFE_RIGHT, TURN_SPEED, 9, 5.0, SensorsToUse.NONE);
-                myCollectionLiftDown(0.7, 1.0);
             }
 
+
+            myCollectionLiftDown(0.7, 1.0);
+            myCollectionSlideOut(0.8,1);
+            robot.turnspinnerservobacwards(1);
         }
         RobotLog.ii("CAL", "Exit - myDetectionRun");
     }
